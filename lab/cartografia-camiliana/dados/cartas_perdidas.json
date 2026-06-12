@@ -1,0 +1,137 @@
+[
+  {
+    "id": "perdida-001",
+    "destinatario_provavel": "Silva Pinto",
+    "ano_aproximado": "anos 1880",
+    "tema": "32 cartas da fase final que Silva Pinto possuía mas decidiu não publicar",
+    "citada_por": "Silva Pinto (ed.), Cartas de Camillo Castello Branco, Tavares Cardoso & Irmão, Lisboa, 1895, prefácio: «Releio as cartas em meu poder. São setenta e duas. Publico apenas quarenta.»",
+    "ultima_pista": "Em mãos de Silva Pinto, Lisboa, 1895. Paradeiro após o seu falecimento (1911) desconhecido.",
+    "porque_relevante": "Cartas da fase final do Camilo, possivelmente as mais íntimas — Silva Pinto censurou-as deliberadamente."
+  },
+  {
+    "id": "perdida-002",
+    "destinatario_provavel": "Freitas Fortuna (e Ana Plácido)",
+    "ano_aproximado": "anos 1880",
+    "tema": "Cartas em falta na compilação de Dois Anos de Agonia",
+    "citada_por": "Júlio Dias da Costa (ed.), Dois Anos de Agonia, c.1930, advertência editorial",
+    "ultima_pista": "Editor afirma que «algumas cartas estão em falta por terem sido perdidas ou propositadamente subtraídas».",
+    "porque_relevante": "Documentam a derradeira agonia (cegueira, sífilis, suicídio iminente). Subtracção deliberada sugere matéria sensível."
+  },
+  {
+    "id": "perdida-003",
+    "destinatario_provavel": "Maria da Felicidade do Couto Browne",
+    "ano_aproximado": "1849-1861",
+    "tema": "Cartas em prosa (não as públicas em verso); putativa relação platónica",
+    "citada_por": "Vários biógrafos do séc. XX (tradição)",
+    "ultima_pista": "Nunca confirmadas materialmente; salão literário de Browne no Porto.",
+    "porque_relevante": "Esclareceria a relação Camilo–Browne, peça importante da sua trajectória portuense pré-Plácido."
+  },
+  {
+    "id": "perdida-004",
+    "destinatario_provavel": "Manuel Pinheiro Alves (marido de Ana Plácido)",
+    "ano_aproximado": "1859-1860",
+    "tema": "Possível troca anterior ao processo; ameaças/ultimatos",
+    "citada_por": "Processo-crime de adultério, Arquivo Tribunal da Relação Porto",
+    "ultima_pista": "Processo judicial (Museu Judiciário Porto); existem omissões.",
+    "porque_relevante": "Documento-chave para a fase mais dramática da vida do escritor."
+  },
+  {
+    "id": "perdida-005",
+    "destinatario_provavel": "Jorge Castelo Branco (filho com doença mental)",
+    "ano_aproximado": "anos 1870-1880",
+    "tema": "Correspondência com filho internado",
+    "citada_por": "Aquilino Ribeiro, O Romance de Camilo, Bertrand, 1961",
+    "ultima_pista": "Tradição familiar; possivelmente no ramo Vieira de Castro (Fafe) ou descendência directa.",
+    "porque_relevante": "Dimensão íntima e patológica raramente documentada — chaves da depressão e suicídio de Camilo."
+  },
+  {
+    "id": "perdida-006",
+    "destinatario_provavel": "Nuno Castelo Branco (segundo filho)",
+    "ano_aproximado": "anos 1880",
+    "tema": "Correspondência paterno-filial em fase de doença",
+    "citada_por": "Aquilino Ribeiro, biografia citada; bibliografia camiliana de Alexandre Cabral",
+    "ultima_pista": "Não localizadas.",
+    "porque_relevante": "Mesma razão da perdida-005."
+  },
+  {
+    "id": "perdida-007",
+    "destinatario_provavel": "Castilho (cartas de Camilo recebidas para lá das 207 do RGPL)",
+    "ano_aproximado": "anos 1870",
+    "tema": "Possíveis cartas que não tenham seguido para o Real Gabinete RJ",
+    "citada_por": "Convergência Lusíada, estudo das 207 cartas — implícita possibilidade de incompletude",
+    "ultima_pista": "Castilho morre 1875; destino dos seus papéis precisa de ser reconstituído.",
+    "porque_relevante": "Para fechar o ciclo do diálogo Castilho-Camilo."
+  },
+  {
+    "id": "perdida-008",
+    "destinatario_provavel": "Editores parisienses / livreiros franceses",
+    "ano_aproximado": "anos 1850-1860",
+    "tema": "Trocas com Paris",
+    "citada_por": "Aquilino Ribeiro, O Romance de Camilo; estudos sobre romantismo português",
+    "ultima_pista": "Hipotética. A própria existência de viagem-exílio a Paris não está bem documentada.",
+    "porque_relevante": "Esclareceria a dimensão europeia/francófona do escritor, normalmente subestimada."
+  },
+  {
+    "id": "perdida-009",
+    "destinatario_provavel": "Correspondentes brasileiros em Recife / São Paulo / Salvador",
+    "ano_aproximado": "anos 1870-1880",
+    "tema": "Leitores e editores brasileiros que escreviam ao autor (recepção)",
+    "citada_por": "Tradição documentada na imprensa luso-brasileira; bibliografia camiliana do Real Gabinete",
+    "ultima_pista": "Fundos a investigar: IHGB, Biblioteca Nacional do Brasil, Academia Brasileira de Letras.",
+    "porque_relevante": "Mapearia a recepção brasileira em vida — frente quase virgem."
+  },
+  {
+    "id": "perdida-010",
+    "destinatario_provavel": "Família de São Miguel de Seide / vizinhos / lavradores",
+    "ano_aproximado": "1863-1890",
+    "tema": "Bilhetes do quotidiano em Seide",
+    "citada_por": "Aquilino Ribeiro, O Romance de Camilo; José Viale Moutinho, Memórias Fotobiográficas de Camilo Castelo Branco, 2009",
+    "ultima_pista": "Casa de Camilo, descendentes locais; arquivos paroquiais.",
+    "porque_relevante": "Picaria a «pequena história» do escritor rural — completamento etnográfico do retrato literário."
+  },
+  {
+    "id": "perdida-011",
+    "destinatario_provavel": "Camilo (recebidas) de Bernardina Amélia (filha)",
+    "ano_aproximado": "anos 1870-1880",
+    "tema": "Cartas da filha ao pai (a BNP detém sobretudo as do pai à filha)",
+    "citada_por": "BNP/ACPC, descritivo do espólio N23",
+    "ultima_pista": "Possivelmente conservadas em ramo paterno do genro António Francisco de Carvalho.",
+    "porque_relevante": "Fechar o diálogo familiar; voz feminina da geração seguinte."
+  },
+  {
+    "id": "perdida-012",
+    "destinatario_provavel": "Camilo (recebidas) de Tomás Ribeiro",
+    "ano_aproximado": "1863-1890",
+    "tema": "O reverso da troca com Tomás Ribeiro (Casa de Camilo só tem as autógrafas de Camilo)",
+    "citada_por": "Casa de Camilo, descritivo da aquisição 2006",
+    "ultima_pista": "Possivelmente entre os papéis recolhidos pelo próprio Camilo em Seide — espólio difuso.",
+    "porque_relevante": "Reconstituir o diálogo, não apenas o monólogo de Camilo."
+  },
+  {
+    "id": "perdida-013",
+    "destinatario_provavel": "Padre Sena Freitas (para lá das 2 «inéditas»)",
+    "ano_aproximado": "anos 1880",
+    "tema": "Polémica religiosa Camilo-jesuítas",
+    "citada_por": "«Duas cartas inéditas do Padre Sena Freitas», Universidade dos Açores",
+    "ultima_pista": "Estudo sugere haver mais material disperso em Açores e arquivos jesuítas.",
+    "porque_relevante": "Documenta a viragem religiosa do Camilo dos últimos anos."
+  },
+  {
+    "id": "perdida-014",
+    "destinatario_provavel": "Editores intermediários da fase Chardron (1869-1885)",
+    "ano_aproximado": "1869-1885",
+    "tema": "Documentação editorial diária — provas, contratos, queixas",
+    "citada_por": "Bibliografia camiliana de Alexandre Cabral; Eduardo Costa Santos, Camilo e os seus editores",
+    "ultima_pista": "Após morte de Chardron (1885), Lello assumiu — papéis dispersaram-se.",
+    "porque_relevante": "Reconstrução do circuito editorial portuense — frente económica raramente estudada."
+  },
+  {
+    "id": "perdida-015",
+    "destinatario_provavel": "Visconde de Ouguela (lacuna entre as «colecções» SP e Coimbra)",
+    "ano_aproximado": "c.1840-1860",
+    "tema": "Cartas de juventude (anteriores às 250 conhecidas) — Ouguela foi amigo de infância",
+    "citada_por": "A. Campos Matos (org.), Camilo Íntimo, 2012",
+    "ultima_pista": "Descendentes em Portugal e Brasil; investigação genealógica pendente.",
+    "porque_relevante": "Camilo na adolescência/juventude — quase sem fontes epistolares conhecidas."
+  }
+]
