@@ -338,6 +338,23 @@ svg.defs{position:absolute;width:0;height:0;overflow:hidden}
 }
 .fecho__tese em{font-style:italic;color:var(--sangue)}
 
+.fecho__profecia{margin-bottom:5rem}
+.fecho__profecia .rot{
+  display:block;font-size:.64rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--sangue);margin-bottom:1.2rem;
+}
+.fecho__profecia .txt{
+  font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(1.05rem,2.2vw,1.3rem);line-height:1.85;
+  color:var(--tinta-meia);max-width:34rem;margin:0 auto;
+}
+.fecho__profecia .resposta{
+  display:block;margin-top:1.7rem;
+  font-family:'EB Garamond',serif;font-style:normal;
+  font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--sangue);
+}
+
 .ass{display:flex;flex-direction:column;align-items:center;gap:1.3rem}
 .ass__tipo{
   font-family:'IM Fell English',serif;font-style:italic;
@@ -505,7 +522,7 @@ html.rm .ass__rubrica path{stroke-dashoffset:0}
       <p class="cela__rotulo">Cadeia da Relação · Porto · 1860 – 1861</p>
       <p class="cela__texto" id="passagem">Um homem entra preso por amar. Fica trezentas e oitenta e três noites. E algures no meio delas — em quinze dias, à luz que as grades deixavam passar — escreve o romance de que a língua portuguesa nunca mais se levantou:</p>
       <p class="cela__obra" id="obra">Amor de Perdição</p>
-      <p class="cela__fonte" id="fonte">escrito no cárcere em quinze dias · <i>Memórias do Cárcere</i>, 1862</p>
+      <p class="cela__fonte" id="fonte">«escrevi o romance em quinze dias, os mais atormentados da minha vida» · prefácio da 2.ª edição</p>
     </div>
 
     <p class="cela__dia mascarado" id="dia" aria-hidden="true">I</p>
@@ -551,6 +568,15 @@ html.rm .ass__rubrica path{stroke-dashoffset:0}
     </g>
   </svg>
   <div class="real reveal" id="seloReal"></div>
+
+  <div class="fecho__profecia reveal">
+    <span class="rot">profecia · prefácio da 5.ª edição · 1879</span>
+    <p class="txt">Dezassete anos depois, farto de lágrimas e da moda realista,
+    Camilo profetizou que aquela 5.ª edição levaria mais de um século a esgotar-se
+    — e que talvez ele próprio, por metempsicose, reaparecesse na sociedade
+    do século XXI para o ver.
+    <span class="resposta">século XXI — estás a ler-lhe a resposta</span></p>
+  </div>
 
   <p class="fecho__tese reveal">A língua portuguesa não é um instrumento.<br>
   É uma <em>herança com dívidas</em>.<br>
