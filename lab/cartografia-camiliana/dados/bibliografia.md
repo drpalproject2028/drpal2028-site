@@ -2,6 +2,10 @@
 
 Estado em 2026-06-12. Lista curada usada como fundamento do seed da Cartografia Camiliana.
 
+## Fonte primária fundacional
+
+0. **Henrique Marques, *Bibliographia Camilliana — Primeira Parte: A Obra de Camillo*.** Lisboa, Livraria de António Maria Pereira (Rua Augusta, 50-52), MDCCCXCIV (1894). **A primeira bibliografia camiliana, publicada quatro anos após a morte do autor.** Inventário coevo, com testemunhos directos sobre obras, edições, traduções, prefácios e dedicatórias. Toda a bibliografia camiliana posterior assenta neste levantamento. Cópia em mãos do coordenador do projecto: usada para verificação cruzada de entradas marcadas com `verificado_por: Marques 1894`.
+
 ## Biografias e estudos fundamentais
 
 1. **Aquilino Ribeiro, *O Romance de Camilo*.** Bertrand, Lisboa, 1957-1961 (3 vols.); reedição em volume único, com prefácio de José Cândido de Oliveira Martins, c.2025. A grande biografia novelística, cruzando arquivo e narrativa.

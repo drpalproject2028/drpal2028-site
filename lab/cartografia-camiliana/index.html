@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cartografia Camiliana — onde param as cartas de Camilo</title>
+<meta name="description" content="Mapa aberto da correspondência de Camilo Castelo Branco. Portugal · Brasil · diáspora. Onde estão hoje as suas cartas, e quais ninguém ainda encontrou.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cartografia Camiliana">
+<meta property="og:description" content="Onde param as cartas de Camilo Castelo Branco. Mapa aberto, fontes citáveis, contribuição peer-reviewed.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cartografia Camiliana">
+<meta name="twitter:description" content="Onde param as cartas de Camilo Castelo Branco. PT · BR · diáspora.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M5 25h22v2H5zM6 24V14l10-9 10 9v10' fill='none' stroke='%231a140a' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --papel:#ECE6D5;
+  --papel-fundo:#E2DBC6;
+  --papel-claro:#F4EFE0;
+  --tinta:#1A140A;
+  --tinta-meia:#3F3527;
+  --tinta-clara:#7C6F58;
+  --sangue:#76201C;
+  --oceano:#D4CDB7;
+  --gz-tom:#3E3424;
+  --vela:#C99756;
+}
+
+html{scroll-behavior:smooth}
+body{
+  background:var(--papel);color:var(--tinta);
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:18px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--sangue);color:var(--papel-claro)}
+
+a{color:var(--sangue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--tinta)}
+
+button{font:inherit;cursor:pointer;background:none;border:none;color:inherit}
+
+/* ── grão de papel global ──────────────────────────────── */
+.grao{position:fixed;inset:0;z-index:200;pointer-events:none;
+  mix-blend-mode:multiply;opacity:.35;width:100%;height:100%}
+
+/* ── cabeçalho ─────────────────────────────────────────── */
+.masto{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:1.2rem clamp(1.2rem,4vw,2.4rem);
+  font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--tinta-clara);
+  border-bottom:1px solid rgba(26,20,10,.1);
+}
+.masto a{color:var(--tinta-meia);text-decoration:none}
+.masto a:hover{color:var(--sangue)}
+
+/* ── intro ─────────────────────────────────────────────── */
+.intro{
+  max-width:64rem;margin:0 auto;
+  padding:clamp(3rem,8vw,6rem) clamp(1.2rem,4vw,2.4rem) clamp(2rem,5vw,3.5rem);
+}
+.intro__titulo{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;line-height:.92;letter-spacing:-.012em;
+  font-size:clamp(2.8rem,9vw,6.5rem);
+  margin-bottom:1.4rem;
+}
+.intro__titulo em{font-style:italic;font-weight:300;color:var(--sangue)}
+.intro__lead{
+  max-width:38rem;font-size:clamp(1.05rem,1.8vw,1.3rem);
+  line-height:1.6;color:var(--tinta-meia);
+}
+.intro__lead strong{color:var(--tinta);font-weight:500}
+.contadores{
+  display:flex;flex-wrap:wrap;gap:1.8rem 3rem;
+  margin-top:3rem;padding-top:2rem;
+  border-top:1px solid rgba(26,20,10,.12);
+}
+.cont{display:flex;flex-direction:column;gap:.25rem}
+.cont__num{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(2rem,4vw,3rem);line-height:1;
+  color:var(--tinta);
+}
+.cont__num em{font-style:italic;color:var(--sangue)}
+.cont__rot{
+  font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--tinta-clara);
+}
+
+/* ── atlas ─────────────────────────────────────────────── */
+.atlas{
+  display:grid;grid-template-columns:minmax(0,1fr) min(28rem,30vw);
+  gap:0;
+  border-top:1px solid rgba(26,20,10,.12);
+  border-bottom:1px solid rgba(26,20,10,.12);
+  background:var(--papel-fundo);
+  min-height:78vh;
+}
+.atlas__mapa{
+  position:relative;background:var(--papel-fundo);
+  border-right:1px solid rgba(26,20,10,.12);
+  overflow:hidden;
+}
+.atlas__svg{display:block;width:100%;height:100%;cursor:crosshair}
+.atlas__legenda{
+  position:absolute;left:1.2rem;bottom:1.2rem;z-index:5;
+  display:flex;flex-direction:column;gap:.5rem;
+  background:rgba(244,239,224,.88);
+  padding:.9rem 1.1rem;border-radius:2px;
+  font-size:.72rem;letter-spacing:.05em;
+  backdrop-filter:blur(2px);
+  border:1px solid rgba(26,20,10,.08);
+}
+.atlas__legenda .ll{display:flex;align-items:center;gap:.6rem}
+.atlas__legenda .dot{
+  width:.7rem;height:.7rem;border-radius:50%;
+  background:var(--tinta);flex-shrink:0;
+}
+.atlas__legenda .dot--inst{background:var(--tinta)}
+.atlas__legenda .dot--pub{background:var(--tinta-clara);box-shadow:0 0 0 1px var(--tinta-meia)}
+.atlas__legenda .dot--priv{background:var(--vela)}
+.atlas__legenda .dot--perd{background:var(--sangue)}
+
+.atlas__painel{
+  background:var(--papel);padding:2rem clamp(1.2rem,3vw,1.8rem);
+  overflow-y:auto;max-height:78vh;
+}
+.atlas__rot{
+  font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--tinta-clara);margin-bottom:1.4rem;
+}
+
+fieldset{border:none;margin-bottom:1.4rem}
+legend{
+  font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--tinta-meia);margin-bottom:.6rem;
+}
+.ctrl{display:flex;flex-direction:column;gap:.35rem}
+.ctrl label{
+  display:flex;align-items:center;gap:.55rem;
+  font-size:.95rem;color:var(--tinta-meia);cursor:pointer;
+  padding:.15rem 0;
+}
+.ctrl label:hover{color:var(--tinta)}
+.ctrl input[type="checkbox"]{accent-color:var(--sangue);width:14px;height:14px}
+.ctrl .conta{margin-left:auto;font-size:.78rem;color:var(--tinta-clara);
+  font-variant-numeric:tabular-nums}
+
+.busca{
+  width:100%;background:var(--papel-claro);
+  border:1px solid rgba(26,20,10,.18);
+  padding:.6rem .8rem;font:inherit;font-size:.95rem;
+  color:var(--tinta);border-radius:2px;
+}
+.busca::placeholder{color:var(--tinta-clara);font-style:italic}
+.busca:focus{outline:none;border-color:var(--sangue)}
+
+/* ficha de carta dentro do painel */
+.ficha{
+  margin-top:1.6rem;padding-top:1.6rem;
+  border-top:1px dashed rgba(26,20,10,.18);
+}
+.ficha[hidden]{display:none}
+.ficha__topo{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.ficha__nome{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:1.45rem;line-height:1.25;
+}
+.ficha__nome em{font-style:italic;color:var(--sangue)}
+.ficha__fechar{
+  font-size:1.3rem;line-height:1;color:var(--tinta-clara);
+  width:1.8rem;height:1.8rem;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.ficha__fechar:hover{color:var(--sangue)}
+.ficha dl{margin-top:1rem;display:grid;grid-template-columns:auto 1fr;gap:.4rem 1rem;font-size:.92rem}
+.ficha dt{
+  font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--tinta-clara);padding-top:.18rem;
+}
+.ficha dd{color:var(--tinta-meia)}
+.ficha .badge{
+  display:inline-block;font-size:.62rem;letter-spacing:.18em;
+  text-transform:uppercase;padding:.15rem .5rem;border-radius:2px;
+}
+.b-inst{background:var(--tinta);color:var(--papel-claro)}
+.b-pub{background:var(--papel-fundo);color:var(--tinta-meia);border:1px solid var(--tinta-clara)}
+.b-priv{background:var(--vela);color:var(--tinta)}
+.b-perd{background:var(--sangue);color:var(--papel-claro)}
+
+/* tooltip sobre o mapa */
+.tooltip{
+  position:absolute;z-index:6;pointer-events:none;
+  background:var(--tinta);color:var(--papel-claro);
+  padding:.3rem .55rem;font-size:.72rem;letter-spacing:.02em;
+  border-radius:2px;transform:translate(-50%,-130%);
+  opacity:0;transition:opacity .15s ease;white-space:nowrap;
+  box-shadow:0 2px 8px rgba(0,0,0,.18);
+}
+.tooltip.on{opacity:1}
+.tooltip strong{color:var(--vela);font-weight:500}
+
+/* ── secção perdidas ──────────────────────────────────── */
+.perdidas{
+  background:var(--papel-claro);
+  padding:clamp(3.5rem,7vw,5.5rem) clamp(1.2rem,4vw,2.4rem);
+  border-bottom:1px solid rgba(26,20,10,.12);
+}
+.perdidas__cabeca{max-width:46rem;margin:0 auto 3rem}
+.perdidas__titulo{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(1.9rem,4.4vw,2.8rem);line-height:1.2;
+  margin-bottom:1.2rem;
+}
+.perdidas__titulo em{font-style:italic;color:var(--sangue)}
+.perdidas__lead{color:var(--tinta-meia);font-size:1.05rem;line-height:1.6;max-width:38rem}
+.perdidas__grid{
+  display:grid;gap:1.4rem;
+  grid-template-columns:repeat(auto-fill,minmax(min(100%,22rem),1fr));
+  max-width:80rem;margin:0 auto;
+}
+.perd-card{
+  background:var(--papel);padding:1.5rem 1.4rem;
+  border:1px solid rgba(26,20,10,.1);position:relative;
+  display:flex;flex-direction:column;gap:.7rem;
+}
+.perd-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--sangue);opacity:.55;
+}
+.perd-card h3{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:1.25rem;line-height:1.3;
+}
+.perd-card .meta{
+  font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--tinta-clara);
+}
+.perd-card .citacao{
+  font-style:italic;color:var(--tinta-meia);
+  font-size:.92rem;line-height:1.55;
+}
+.perd-card .pista{font-size:.88rem;color:var(--tinta-meia)}
+.perd-card .pista strong{
+  display:block;font-style:normal;font-weight:500;
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--tinta-clara);margin-bottom:.2rem;
+}
+.perd-card .ir{
+  margin-top:auto;align-self:flex-start;
+  font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sangue);padding:.45rem 0;border-bottom:1px solid var(--sangue);
+}
+.perd-card .ir:hover{color:var(--tinta);border-color:var(--tinta)}
+
+/* ── secção intake ────────────────────────────────────── */
+.intake{padding:clamp(4rem,7vw,6rem) clamp(1.2rem,4vw,2.4rem);max-width:46rem;margin:0 auto}
+.intake__titulo{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(1.9rem,4.4vw,2.8rem);line-height:1.2;
+  margin-bottom:1.2rem;
+}
+.intake__lead{color:var(--tinta-meia);margin-bottom:2.6rem}
+form{display:flex;flex-direction:column;gap:1.4rem}
+form fieldset legend{margin-bottom:.7rem}
+.radios{display:flex;flex-direction:column;gap:.5rem}
+.radios label{
+  display:flex;align-items:center;gap:.6rem;cursor:pointer;
+  padding:.7rem .9rem;background:var(--papel-claro);
+  border:1px solid rgba(26,20,10,.12);transition:border-color .15s,background .15s;
+}
+.radios label:hover{border-color:var(--tinta-clara)}
+.radios input[type="radio"]:checked + span{color:var(--sangue);font-weight:500}
+.radios input[type="radio"]{accent-color:var(--sangue)}
+.radios span{color:var(--tinta-meia)}
+form label.campo{display:flex;flex-direction:column;gap:.4rem}
+form label.campo .et{
+  font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--tinta-meia);
+}
+form input[type="text"],form input[type="email"],form textarea{
+  font:inherit;font-size:1rem;color:var(--tinta);
+  background:var(--papel-claro);border:1px solid rgba(26,20,10,.15);
+  padding:.7rem .9rem;border-radius:2px;font-family:'EB Garamond',serif;
+}
+form input:focus,form textarea:focus{outline:none;border-color:var(--sangue)}
+form textarea{resize:vertical;min-height:8rem;line-height:1.55}
+form .submeter{
+  align-self:flex-start;padding:.8rem 1.6rem;
+  background:var(--tinta);color:var(--papel-claro);
+  font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;
+  border-radius:2px;transition:background .15s;
+}
+form .submeter:hover{background:var(--sangue)}
+form .nota{
+  font-size:.82rem;color:var(--tinta-clara);font-style:italic;
+  border-left:2px solid rgba(26,20,10,.15);padding-left:.9rem;
+}
+.intake__obrigado{
+  display:none;padding:2rem;background:var(--papel-claro);
+  border:1px solid var(--sangue);text-align:center;
+}
+.intake__obrigado.visivel{display:block}
+
+/* ── colofão ──────────────────────────────────────────── */
+.colofao{
+  background:var(--tinta);color:var(--papel-claro);
+  padding:clamp(4rem,7vw,6rem) clamp(1.2rem,4vw,2.4rem);
+}
+.colofao__inner{max-width:46rem;margin:0 auto}
+.colofao h2{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:clamp(1.7rem,3.8vw,2.4rem);line-height:1.25;
+  margin-bottom:1.6rem;color:var(--papel);
+}
+.colofao h2 em{font-style:italic;color:var(--vela)}
+.colofao p{margin-bottom:1.2rem;color:rgba(236,230,213,.82);line-height:1.7}
+.colofao a{color:var(--vela)}
+.colofao a:hover{color:var(--papel-claro)}
+.colofao .pequena{font-size:.78rem;letter-spacing:.04em;opacity:.7}
+.colofao .blocos{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));
+  gap:1.5rem 2.4rem;margin:2.4rem 0;
+  padding:2rem 0;border-top:1px solid rgba(236,230,213,.18);
+  border-bottom:1px solid rgba(236,230,213,.18);
+}
+.colofao .blocos h3{
+  font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--vela);margin-bottom:.7rem;
+}
+.colofao .blocos p{font-size:.92rem;margin:0;line-height:1.55}
+
+footer{
+  padding:2rem clamp(1.2rem,4vw,2.4rem);
+  text-align:center;font-size:.7rem;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--tinta-clara);
+  border-top:1px solid rgba(26,20,10,.1);
+}
+footer .verso{
+  margin-top:.7rem;font-style:italic;letter-spacing:.02em;
+  text-transform:none;font-size:.82rem;font-family:'Cormorant Garamond',serif;
+  color:var(--tinta-meia);
+}
+
+/* ── inkdrops do mapa ─────────────────────────────────── */
+.drop{cursor:pointer;transition:transform .15s ease}
+.drop:hover{transform:scale(1.15)}
+.drop circle{transition:fill .15s,stroke .15s}
+.drop--inst circle{fill:var(--tinta);stroke:var(--tinta);stroke-width:1}
+.drop--pub circle{fill:var(--papel);stroke:var(--tinta-meia);stroke-width:1.5}
+.drop--priv circle{fill:var(--vela);stroke:var(--tinta);stroke-width:1}
+.drop--perd circle{fill:var(--sangue);stroke:var(--sangue);stroke-width:1}
+.drop--perd circle.pulso{animation:pulso 2.4s ease-in-out infinite}
+.drop.activa circle{stroke:var(--sangue);stroke-width:2.5}
+.drop text{
+  font-family:'EB Garamond',serif;font-size:11px;
+  fill:var(--tinta-meia);pointer-events:none;
+}
+.drop--perd text{fill:var(--sangue);font-style:italic}
+
+@keyframes pulso{
+  0%,100%{opacity:.9;transform:scale(1)}
+  50%{opacity:.55;transform:scale(1.35)}
+}
+
+.coast{fill:var(--papel);stroke:var(--tinta-meia);stroke-width:1.2;
+  stroke-linejoin:round;stroke-linecap:round}
+.coast--gz{fill:var(--papel);opacity:.6;stroke-dasharray:none}
+.grade{stroke:var(--tinta-meia);stroke-width:.4;opacity:.18;fill:none;stroke-dasharray:2 4}
+.lab{font-family:'EB Garamond',serif;font-style:italic;
+  fill:var(--tinta-clara);font-size:13px;letter-spacing:.05em}
+.lab--mar{font-size:11px;letter-spacing:.4em;text-transform:uppercase;font-style:normal}
+.lab--pais{font-size:14px;letter-spacing:.18em;text-transform:uppercase;font-style:normal;
+  fill:var(--tinta-meia);opacity:.55}
+
+/* ── responsivo ───────────────────────────────────────── */
+@media (max-width:880px){
+  .atlas{grid-template-columns:1fr;min-height:auto}
+  .atlas__mapa{height:62vh;border-right:none;border-bottom:1px solid rgba(26,20,10,.12)}
+  .atlas__painel{max-height:none}
+}
+@media (max-width:520px){
+  body{font-size:17px}
+  .perd-card{padding:1.2rem 1.1rem}
+  .atlas__mapa{height:54vh}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .drop--perd circle.pulso{animation:none}
+  .drop:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg class="grao" aria-hidden="true">
+  <filter id="graoF" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .45 0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#graoF)"/>
+</svg>
+
+<header class="masto">
+  <span>Cartografia Camiliana</span>
+  <span>seed inicial · <a href="#colofao">colofão</a></span>
+</header>
+
+<section class="intro">
+  <h1 class="intro__titulo">Cartografia<br><em>Camiliana</em></h1>
+  <p class="intro__lead">Mapa aberto da correspondência de Camilo Castelo Branco — <strong>Portugal, Brasil, diáspora</strong>. Onde estão hoje as suas cartas, onde foram vistas pela última vez, e quais ninguém ainda encontrou.</p>
+
+  <div class="contadores">
+    <div class="cont"><span class="cont__num" id="contLoc">—</span><span class="cont__rot">cartas localizadas</span></div>
+    <div class="cont"><span class="cont__num" id="contInst">—</span><span class="cont__rot">instituições</span></div>
+    <div class="cont"><span class="cont__num" id="contPerd"><em>—</em></span><span class="cont__rot">perdidas/citadas</span></div>
+    <div class="cont"><span class="cont__num" id="contEd">—</span><span class="cont__rot">edições registadas</span></div>
+  </div>
+</section>
+
+<section class="atlas" id="mapa">
+  <div class="atlas__mapa" id="mapaWrap">
+    <svg class="atlas__svg" id="atlas" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet" aria-label="Mapa da correspondência camiliana — Atlântico, Portugal e Brasil">
+      <defs>
+        <filter id="paperF" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="3" stitchTiles="stitch"/>
+          <feColorMatrix values="0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .04 0 0 0 .08 0"/>
+        </filter>
+      </defs>
+      <rect width="1000" height="700" fill="var(--papel-fundo)"/>
+      <rect width="1000" height="700" filter="url(#paperF)" opacity=".7"/>
+
+      <!-- gradeado lat/lon -->
+      <g class="grade" id="grade"></g>
+
+      <!-- nomes do mar e regiões -->
+      <text class="lab lab--mar" x="500" y="380" text-anchor="middle">Oceano Atlântico</text>
+      <text class="lab lab--pais" x="850" y="120" text-anchor="middle">Portugal</text>
+      <text class="lab lab--pais" x="250" y="540" text-anchor="middle">Brasil</text>
+      <text class="lab" x="858" y="85" text-anchor="middle">Galiza</text>
+      <text class="lab" x="910" y="200" text-anchor="middle">França</text>
+
+      <!-- Portugal continental (paths inline, simplificados) -->
+      <path class="coast" id="ptCoast" d=""/>
+      <path class="coast coast--gz" id="gzCoast" d=""/>
+      <path class="coast" id="brCoast" d=""/>
+
+      <!-- gotas de tinta serão desenhadas aqui -->
+      <g id="drops"></g>
+    </svg>
+    <div class="atlas__legenda" aria-hidden="true">
+      <div class="ll"><span class="dot dot--inst"></span><span>institucional</span></div>
+      <div class="ll"><span class="dot dot--pub"></span><span>publicada · original ?</span></div>
+      <div class="ll"><span class="dot dot--priv"></span><span>privada conhecida</span></div>
+      <div class="ll"><span class="dot dot--perd"></span><span>perdida · citada</span></div>
+    </div>
+    <div class="tooltip" id="tip"></div>
+  </div>
+
+  <aside class="atlas__painel">
+    <p class="atlas__rot">filtros</p>
+
+    <fieldset>
+      <legend>estado</legend>
+      <div class="ctrl" id="ctrlEstado">
+        <label><input type="checkbox" checked value="institucional"> institucional <span class="conta" data-c="institucional">0</span></label>
+        <label><input type="checkbox" checked value="publicada-original-desconhecido"> publicada · original ? <span class="conta" data-c="publicada-original-desconhecido">0</span></label>
+        <label><input type="checkbox" checked value="privada-conhecida"> privada conhecida <span class="conta" data-c="privada-conhecida">0</span></label>
+        <label><input type="checkbox" checked value="perdida-citada"> perdida · citada <span class="conta" data-c="perdida-citada">0</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>tipo</legend>
+      <div class="ctrl" id="ctrlTipo">
+        <label><input type="checkbox" checked value="epistolar"> epistolar <span class="conta" data-t="epistolar">0</span></label>
+        <label><input type="checkbox" checked value="prefacio"> prefácio / dedicatória <span class="conta" data-t="prefacio">0</span></label>
+        <label><input type="checkbox" checked value="traducao"> tradução <span class="conta" data-t="traducao">0</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>destinatário</legend>
+      <input class="busca" id="busca" type="search" placeholder="Ana Plácido, Tomás Ribeiro…">
+    </fieldset>
+
+    <div class="ficha" id="ficha" hidden>
+      <div class="ficha__topo">
+        <h3 class="ficha__nome" id="fichaNome"></h3>
+        <button class="ficha__fechar" id="fichaFechar" aria-label="Fechar ficha">×</button>
+      </div>
+      <dl>
+        <dt>ano</dt><dd id="fichaAno"></dd>
+        <dt>tema</dt><dd id="fichaTema"></dd>
+        <dt>onde está hoje</dt><dd id="fichaLocal"></dd>
+        <dt>estado</dt><dd id="fichaEstado"></dd>
+        <dt>fonte</dt><dd id="fichaFonte"></dd>
+        <dt>incerteza</dt><dd id="fichaInc"></dd>
+      </dl>
+    </div>
+  </aside>
+</section>
+
+<section class="perdidas" id="perdidas">
+  <div class="perdidas__cabeca">
+    <h2 class="perdidas__titulo">As <em>Cartas Perdidas</em></h2>
+    <p class="perdidas__lead">Citações que sobreviveram à carta. Os biógrafos viram-nas, leram-nas, transcreveram-nas — e depois desapareceram. Se viste alguma, sabes de alguma, ou tens uma pista, conta-nos.</p>
+  </div>
+  <div class="perdidas__grid" id="perdidasGrid"></div>
+</section>
+
+<section class="intake" id="contribuir">
+  <h2 class="intake__titulo">Tens uma pista?</h2>
+  <p class="intake__lead">Não pedimos o original. Só a pista — uma foto, uma transcrição, uma memória de família, uma referência em catálogo. Com autorização explícita, reencaminhamos a Casa de Camilo ou à instituição relevante. Sempre com crédito ao contribuinte.</p>
+
+  <form name="contributo" method="POST" data-netlify="true" netlify-honeypot="campo-honeypot" id="formContrib">
+    <input type="hidden" name="form-name" value="contributo">
+    <p hidden><label>Não preencher: <input name="campo-honeypot"></label></p>
+
+    <fieldset>
+      <legend>tipo de pista</legend>
+      <div class="radios">
+        <label><input type="radio" name="tipo" value="tenho-uma" required> <span>tenho uma carta (família, herança, compra)</span></label>
+        <label><input type="radio" name="tipo" value="vi-uma"> <span>vi uma (exposição, catálogo, leilão, foto)</span></label>
+        <label><input type="radio" name="tipo" value="acho-que-existe"> <span>acho que existe (memória, referência, hipótese)</span></label>
+      </div>
+    </fieldset>
+
+    <label class="campo">
+      <span class="et">quem és?</span>
+      <input type="text" name="nome" required autocomplete="name">
+    </label>
+
+    <label class="campo">
+      <span class="et">email — para te respondermos</span>
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+
+    <label class="campo">
+      <span class="et">a pista — quem, quando, onde, como sabes</span>
+      <textarea name="descricao" rows="7" required placeholder="Ex.: A minha bisavó dizia que tinha uma carta em casa, em Vila Real, dedicada a um tio. Vi-a uma vez na década de 80; depois perdeu-se. Era em papel grosso, com a assinatura visível."></textarea>
+    </label>
+
+    <p class="nota">O que fazemos com isto: lemos com atenção, respondemos por email, e — só com a tua autorização explícita — adicionamos ao mapa com crédito. Originais ficam de quem os tem. Imagens enviadas continuam tuas; nós só mapeamos o vestígio.</p>
+
+    <button class="submeter" type="submit">enviar pista</button>
+  </form>
+  <div class="intake__obrigado" id="obrigado">
+    <p><strong>Obrigado.</strong> A pista foi recebida. Vamos ler com atenção e responder-te por email nos próximos dias.</p>
+  </div>
+</section>
+
+<section class="colofao" id="colofao">
+  <div class="colofao__inner">
+    <h2>Este projecto <em>não substitui</em> ninguém.</h2>
+    <p>É um instrumento auxiliar — um mapa que cita e remete para quem detém os acervos: a <a href="http://www.camilocastelobranco.org" target="_blank" rel="noopener">Casa-Museu de Camilo</a> em São Miguel de Seide, o <a href="https://acpc.bnportugal.gov.pt/colecoes_autores/n23_castelo_branco_camilo.html" target="_blank" rel="noopener">Arquivo de Cultura Portuguesa Contemporânea da BNP</a>, o <a href="https://www.realgabinete.com.br" target="_blank" rel="noopener">Real Gabinete Português de Leitura</a> no Rio de Janeiro, o Centro de Estudos Camilianos da Universidade do Minho, e tantos outros que aqui aparecem citados.</p>
+
+    <p>O que fazemos é mais simples: <strong>mapear onde estão</strong>, <strong>citar as fontes</strong> e <strong>abrir uma porta</strong> a quem encontrar uma carta na gaveta de uma família.</p>
+
+    <div class="blocos">
+      <div>
+        <h3>seed inicial</h3>
+        <p>15 edições documentadas (1873–2012), 12 instituições com coordenadas, 40 cartas com fonte citável, 15 cartas citadas e não localizadas.</p>
+      </div>
+      <div>
+        <h3>fonte fundacional</h3>
+        <p><em>Bibliographia Camilliana</em>, Henrique Marques (Lisboa, A. M. Pereira, 1894) — primeira bibliografia camiliana, publicada quatro anos após a morte do autor.</p>
+      </div>
+      <div>
+        <h3>princípio</h3>
+        <p>Melhor 25 registos sólidos do que 50 com metade inventada. Cada entrada tem fonte citável e nível de incerteza marcado.</p>
+      </div>
+    </div>
+
+    <p>Os dados (<code style="background:rgba(255,255,255,.06);padding:1px 6px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:.82rem">dados/*.json</code>) estão sob licença <strong>CC BY 4.0</strong>. Originais físicos continuam de quem os tem — não reclamamos posse, custódia ou direitos sobre nenhuma carta.</p>
+
+    <p class="pequena">Coordenação: Paulo Branco · <a href="https://drpal2028.me" target="_blank" rel="noopener">drpal2028.me</a> · Project 2028 · Porto<br>Levantamento bibliográfico: assistido por modelo Claude Fable 5, com auditoria humana das fontes citadas.<br>«A IA serve o Humano.» — GENESIS Protocol.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Cartografia Camiliana · seed 2026.06</p>
+  <p class="verso">«Escrevi o romance em quinze dias, os mais atormentados da minha vida.» — Camilo, prefácio da 2.ª edição de Amor de Perdição</p>
+</footer>
+
+<script>
+(function(){
+'use strict';
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── projecção lat/lon → SVG (1000×700) ─────────────────── */
+/* Atlântico: lon -55 a -5, lat -30 a 45 — equirectangular simples */
+function proj(lat, lon){
+  const x = ((lon + 55) / 50) * 900 + 50;
+  const y = 650 - ((lat + 30) / 75) * 600;
+  return [x, y];
+}
+
+/* ── linhas de costa simplificadas (hand-coded) ─────────── */
+/* Portugal continental */
+const PT = [
+  [42.04,-8.87],[41.69,-8.83],[41.53,-8.78],[41.35,-8.74],[41.15,-8.61],
+  [40.64,-8.65],[40.15,-8.86],[39.60,-9.07],[39.28,-9.32],[38.78,-9.50],
+  [38.69,-9.41],[38.44,-9.10],[38.07,-8.86],[37.65,-8.81],[37.20,-8.95],
+  [36.99,-8.79],[37.02,-8.04],[37.02,-7.93],[37.18,-7.41],
+  [37.71,-7.31],[38.18,-7.10],[38.88,-7.13],[39.59,-7.05],[40.10,-6.94],
+  [40.54,-7.05],[41.20,-6.78],[41.81,-6.76],[41.94,-7.43],[42.04,-8.87]
+];
+/* Galiza (apenas costa norte/oeste simplificada) */
+const GZ = [
+  [42.04,-8.87],[42.23,-8.72],[42.40,-8.77],[42.62,-8.92],[42.83,-9.13],
+  [43.05,-9.27],[43.37,-8.40],[43.55,-8.20],[43.79,-7.85],[43.78,-7.50],
+  [43.50,-7.50],[43.20,-7.55],[42.80,-7.20],[42.20,-7.00],[42.04,-7.20],
+  [42.04,-8.87]
+];
+/* Brasil — arco litoral nordeste-sudeste (RJ + SP costeiros) */
+const BR = [
+  [-5.0,-35.2],[-7.1,-34.85],[-8.05,-34.88],[-9.65,-35.72],[-10.95,-37.05],
+  [-12.97,-38.51],[-13.0,-38.55],[-14.78,-39.05],[-16.41,-39.06],
+  [-18.86,-39.81],[-20.32,-40.30],[-21.76,-40.99],[-22.51,-41.92],
+  [-22.88,-42.02],[-22.90,-43.18],[-23.0,-43.55],[-23.0,-44.0],
+  [-23.50,-45.10],[-23.99,-46.33],[-24.50,-46.80],[-25.43,-48.05],
+  [-25.85,-48.55],[-26.30,-48.65],[-27.0,-48.60],[-27.59,-48.55],
+  [-27.0,-47.5],[-25.0,-46.0],[-23.0,-43.5],[-21.0,-40.5],
+  [-18.5,-39.0],[-15.0,-38.5],[-12.0,-37.5],[-9.0,-35.0],[-7.0,-34.5],
+  [-5.0,-35.2]
+];
+function pathd(pts){
+  return pts.map((p,i)=>(i===0?'M':'L')+proj(p[0],p[1]).map(n=>n.toFixed(1)).join(' ')).join(' ')+' Z';
+}
+document.getElementById('ptCoast').setAttribute('d', pathd(PT));
+document.getElementById('gzCoast').setAttribute('d', pathd(GZ));
+document.getElementById('brCoast').setAttribute('d', pathd(BR));
+
+/* ── gradeado lat/lon ──────────────────────────────────── */
+const grade = document.getElementById('grade');
+for (let lat=-30; lat<=45; lat+=10){
+  const [x1,y1] = proj(lat,-55), [x2,y2] = proj(lat,-5);
+  const ln = document.createElementNS('http://www.w3.org/2000/svg','line');
+  ln.setAttribute('x1',x1); ln.setAttribute('y1',y1);
+  ln.setAttribute('x2',x2); ln.setAttribute('y2',y2);
+  ln.setAttribute('class','grade');
+  grade.appendChild(ln);
+}
+for (let lon=-55; lon<=-5; lon+=10){
+  const [x1,y1] = proj(-30,lon), [x2,y2] = proj(45,lon);
+  const ln = document.createElementNS('http://www.w3.org/2000/svg','line');
+  ln.setAttribute('x1',x1); ln.setAttribute('y1',y1);
+  ln.setAttribute('x2',x2); ln.setAttribute('y2',y2);
+  grade.appendChild(ln);
+}
+
+/* ── dados ──────────────────────────────────────────────── */
+const F = (p)=>fetch(p, {cache:'no-cache'}).then(r=>r.json());
+
+Promise.all([F('dados/instituicoes.json'), F('dados/cartas.json'),
+             F('dados/cartas_perdidas.json'), F('dados/edicoes.json')])
+  .then(([inst, cartas, perdidas, edicoes])=>{
+
+  /* normalizar: tipo default "epistolar" */
+  cartas.forEach(c=>{ if(!c.tipo) c.tipo = 'epistolar'; });
+
+  const instById = Object.fromEntries(inst.map(i=>[i.id,i]));
+
+  /* contadores */
+  document.getElementById('contLoc').textContent  = cartas.length;
+  document.getElementById('contInst').textContent = inst.length;
+  document.getElementById('contPerd').innerHTML   = '<em>'+perdidas.length+'</em>';
+  document.getElementById('contEd').textContent   = edicoes.length;
+
+  /* contagens por filtro */
+  function actualizaContas(){
+    const cE = {institucional:0,'publicada-original-desconhecido':0,'privada-conhecida':0,'perdida-citada':0};
+    const cT = {epistolar:0, prefacio:0, traducao:0};
+    cartas.forEach(c=>{ if(cE[c.estado]!==undefined) cE[c.estado]++; if(cT[c.tipo]!==undefined) cT[c.tipo]++; });
+    perdidas.forEach(()=>{ cE['perdida-citada']++; });
+    document.querySelectorAll('[data-c]').forEach(el=>{
+      el.textContent = cE[el.dataset.c] ?? 0;
+    });
+    document.querySelectorAll('[data-t]').forEach(el=>{
+      el.textContent = cT[el.dataset.t] ?? 0;
+    });
+  }
+  actualizaContas();
+
+  /* gotas: agrupar cartas por instituição actual; perdidas em últimas pistas */
+  const grupos = new Map(); // chave: lat,lon | valor: {lat,lon,cartas:[],estado-mix, instId}
+  function chave(lat, lon){ return lat.toFixed(2)+','+lon.toFixed(2); }
+  function adicionar(lat, lon, c, instId){
+    const k = chave(lat,lon);
+    if (!grupos.has(k)) grupos.set(k, {lat, lon, cartas:[], instId});
+    grupos.get(k).cartas.push(c);
+  }
+  cartas.forEach(c=>{
+    const i = c.local_actual?.instituicao_id ? instById[c.local_actual.instituicao_id] : null;
+    if (i) adicionar(i.lat, i.lon, c, i.id);
+    else if (c.local_actual?.cidade){
+      const ci = inst.find(x=>x.cidade.startsWith(c.local_actual.cidade) || c.local_actual.cidade.startsWith(x.cidade));
+      if (ci) adicionar(ci.lat, ci.lon, c, null);
+    }
+  });
+
+  /* perdidas: representadas em torno do mapa como cintilações */
+  perdidas.forEach((p,i)=>{
+    /* sem coordenadas — distribuir em sequência ao longo da costa atlântica como sinais */
+    const lat = 28 - i*3, lon = -25 + (i%2)*2;
+    adicionar(lat, lon, {...p, estado:'perdida-citada', destinatario:p.destinatario_provavel, tipo:'epistolar', ano:p.ano_aproximado, tema_curto:p.tema, fonte:p.citada_por, perdida:true}, null);
+  });
+
+  /* desenhar gotas */
+  const dropsG = document.getElementById('drops');
+  const tip = document.getElementById('tip');
+  function classeEstado(e){
+    return e==='institucional' ? 'inst' :
+           e==='publicada-original-desconhecido' ? 'pub' :
+           e==='privada-conhecida' ? 'priv' :
+           e==='perdida-citada' ? 'perd' : 'pub';
+  }
+
+  function desenhar(filtros){
+    dropsG.innerHTML = '';
+    let visiveis = 0;
+    for (const g of grupos.values()){
+      const aplicaveis = g.cartas.filter(c=>filtros.passa(c));
+      if (!aplicaveis.length) continue;
+      visiveis += aplicaveis.length;
+      const [x,y] = proj(g.lat, g.lon);
+      const estadoDominante = aplicaveis[0].estado;
+      const cls = classeEstado(estadoDominante);
+      const r = Math.min(20, 4 + Math.log2(aplicaveis.length+1)*3.5);
+      const gEl = document.createElementNS('http://www.w3.org/2000/svg','g');
+      gEl.setAttribute('class','drop drop--'+cls);
+      gEl.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');
+      const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('r', r.toFixed(1));
+      if (cls==='perd') c.setAttribute('class','pulso');
+      gEl.appendChild(c);
+      if (aplicaveis.length>1){
+        const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+        t.setAttribute('x', 0); t.setAttribute('y', r+13);
+        t.setAttribute('text-anchor','middle');
+        t.textContent = aplicaveis.length;
+        gEl.appendChild(t);
+      }
+      gEl.addEventListener('mouseenter', e=>{
+        const inst = g.instId ? instById[g.instId] : null;
+        tip.innerHTML = (inst ? '<strong>'+inst.nome.split(' / ')[0].split(' — ')[0]+'</strong><br>' : '') +
+          aplicaveis.length+' carta'+(aplicaveis.length>1?'s':'');
+        const rect = document.getElementById('mapaWrap').getBoundingClientRect();
+        const cr = gEl.getBoundingClientRect();
+        tip.style.left = (cr.left + cr.width/2 - rect.left) + 'px';
+        tip.style.top  = (cr.top - rect.top) + 'px';
+        tip.classList.add('on');
+      });
+      gEl.addEventListener('mouseleave', ()=>tip.classList.remove('on'));
+      gEl.addEventListener('click', ()=>{
+        document.querySelectorAll('.drop.activa').forEach(d=>d.classList.remove('activa'));
+        gEl.classList.add('activa');
+        abrirFicha(aplicaveis[0], g.instId);
+      });
+      dropsG.appendChild(gEl);
+    }
+  }
+
+  /* ficha */
+  const ficha = document.getElementById('ficha');
+  function abrirFicha(c, instId){
+    ficha.hidden = false;
+    document.getElementById('fichaNome').innerHTML = c.perdida
+      ? '<em>'+(c.destinatario||'?')+'</em>'
+      : (c.destinatario || '?');
+    document.getElementById('fichaAno').textContent = c.ano ?? '—';
+    document.getElementById('fichaTema').textContent = c.tema_curto || c.tema || '—';
+    let local = '—';
+    if (instId && instById[instId]){
+      const i = instById[instId];
+      local = i.nome + ' (' + i.cidade + ', ' + i.pais + ')';
+    } else if (c.local_actual?.cidade){
+      local = c.local_actual.cidade + (c.local_actual.pais ? ', '+c.local_actual.pais : '');
+    } else if (c.ultima_pista){
+      local = c.ultima_pista;
+    }
+    document.getElementById('fichaLocal').textContent = local;
+    const cls = classeEstado(c.estado);
+    document.getElementById('fichaEstado').innerHTML =
+      '<span class="badge b-'+cls+'">'+(c.estado||'—').replace(/-/g,' ')+'</span>';
+    document.getElementById('fichaFonte').textContent = c.fonte || '—';
+    document.getElementById('fichaInc').textContent = c.incerteza || (c.perdida ? 'inerente' : '—');
+  }
+  document.getElementById('fichaFechar').addEventListener('click', ()=>{
+    ficha.hidden = true;
+    document.querySelectorAll('.drop.activa').forEach(d=>d.classList.remove('activa'));
+  });
+
+  /* filtros */
+  const estadosOn = new Set(['institucional','publicada-original-desconhecido','privada-conhecida','perdida-citada']);
+  const tiposOn   = new Set(['epistolar','prefacio','traducao']);
+  let busca = '';
+  function passa(c){
+    if (!estadosOn.has(c.estado)) return false;
+    if (!tiposOn.has(c.tipo)) return false;
+    if (busca && !((c.destinatario||'')+' '+(c.tema_curto||c.tema||'')).toLowerCase().includes(busca)) return false;
+    return true;
+  }
+  function rerender(){ desenhar({passa}); }
+  document.querySelectorAll('#ctrlEstado input').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      cb.checked ? estadosOn.add(cb.value) : estadosOn.delete(cb.value);
+      rerender();
+    });
+  });
+  document.querySelectorAll('#ctrlTipo input').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      cb.checked ? tiposOn.add(cb.value) : tiposOn.delete(cb.value);
+      rerender();
+    });
+  });
+  document.getElementById('busca').addEventListener('input', e=>{
+    busca = e.target.value.trim().toLowerCase();
+    rerender();
+  });
+
+  /* cartas perdidas — grid editorial */
+  const grid = document.getElementById('perdidasGrid');
+  perdidas.forEach(p=>{
+    const div = document.createElement('article');
+    div.className = 'perd-card';
+    div.innerHTML = `
+      <p class="meta">${p.ano_aproximado || ''} · perdida #${p.id.replace('perdida-','')}</p>
+      <h3>${p.destinatario_provavel || '?'}</h3>
+      <p class="citacao">${p.tema || ''}</p>
+      <p class="pista"><strong>citada por</strong>${p.citada_por || '—'}</p>
+      ${p.ultima_pista ? `<p class="pista"><strong>última pista</strong>${p.ultima_pista}</p>` : ''}
+      <button class="ir" data-id="${p.id}">Tens uma pista?</button>
+    `;
+    grid.appendChild(div);
+  });
+  grid.addEventListener('click', e=>{
+    const b = e.target.closest('.ir');
+    if (!b) return;
+    document.getElementById('contribuir').scrollIntoView({behavior: RM ? 'auto' : 'smooth'});
+    const ta = document.querySelector('textarea[name="descricao"]');
+    if (ta && !ta.value){
+      const p = perdidas.find(x=>x.id===b.dataset.id);
+      if (p) ta.value = `Pista sobre a carta perdida #${p.id} (${p.destinatario_provavel || '?'}, ${p.ano_aproximado || '?'}): `;
+      ta.focus();
+    }
+  });
+
+  /* form: feedback amistoso (Netlify trata do submit) */
+  document.getElementById('formContrib').addEventListener('submit', e=>{
+    /* fallback se Netlify Forms ainda não estiver ligado (preview local) */
+    if (location.hostname.endsWith('netlify.app') || location.hostname.endsWith('drpal2028.me')) return;
+    e.preventDefault();
+    document.getElementById('formContrib').style.display = 'none';
+    document.getElementById('obrigado').classList.add('visivel');
+  });
+
+  /* render inicial */
+  rerender();
+})
+.catch(err=>{
+  console.error('Falha a carregar dados:', err);
+  document.getElementById('contLoc').textContent = '—';
+});
+
+})();
+</script>
+</body>
+</html>
