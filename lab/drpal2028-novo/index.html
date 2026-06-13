@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr.PAL Project 2028 — AI serves the Human</title>
+<meta name="description" content="A personal AI operating system. Twenty-two projects in constellation. Built by Paulo Branco in Porto.">
+<meta property="og:title" content="Dr.PAL Project 2028">
+<meta property="og:description" content="A personal AI operating system. The human decides. The system serves.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%23c8a050' stroke-width='1.5'/><circle cx='16' cy='16' r='3' fill='%23c8a050'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080d; --s1:#0e0e16; --s2:#14141e;
+  --border:#1e1e2e; --border-soft:rgba(255,255,255,.06);
+  --t:#e0dcd4; --td:#8a8690; --tf:#4a4650;
+  --gold:#c8a050; --gold-soft:rgba(200,160,80,.10);
+  --teal:#5fc2b5; --teal-soft:rgba(95,194,181,.10);
+  --cyan:#4ecdc4; --rose:#c87a5f;
+  --r:6px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',-apple-system,sans-serif;
+  background:var(--bg);color:var(--t);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  font-size:16px;line-height:1.6;
+}
+[data-lang="pt"] .en{display:none}
+[data-lang="en"] .pt{display:none}
+::selection{background:var(--gold);color:var(--bg)}
+
+/* ── grão sutil ─────────────────────────────────────── */
+.grain{position:fixed;inset:0;z-index:200;pointer-events:none;
+  mix-blend-mode:overlay;opacity:.45;width:100%;height:100%}
+
+/* ── nav ────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:14px 32px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,13,.78);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-soft);
+}
+.nav-logo{
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:500;
+  color:var(--gold);letter-spacing:.12em;display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+}
+.nav-logo svg{width:22px;height:22px}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{
+  font-size:.68rem;color:var(--td);text-decoration:none;
+  letter-spacing:.16em;text-transform:uppercase;transition:color .2s;
+}
+.nav-links a:hover{color:var(--gold)}
+.lang-btn{
+  background:none;border:1px solid var(--border);color:var(--td);
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  padding:5px 12px;border-radius:100px;cursor:pointer;
+  letter-spacing:.14em;transition:all .2s;
+}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── hero ──────────────────────────────────────────── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 48px 80px;overflow:hidden;
+}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:160px;
+  background:linear-gradient(to top,var(--bg) 10%,transparent);
+  z-index:2;pointer-events:none;
+}
+.hero-content{position:relative;z-index:3;max-width:720px}
+.hero-eye{
+  font-family:'IBM Plex Mono',monospace;font-size:.55rem;
+  letter-spacing:.4em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:22px;display:flex;align-items:center;gap:14px;
+  opacity:0;animation:fadeUp .9s ease .2s forwards;
+}
+.hero-eye::before{content:'';width:36px;height:1px;background:var(--gold)}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2.8rem,6vw,5.2rem);font-weight:400;line-height:1;
+  letter-spacing:-.012em;margin-bottom:24px;
+  opacity:0;animation:fadeUp 1s ease .45s forwards;
+}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{
+  font-size:1rem;color:var(--td);line-height:1.75;max-width:560px;
+  opacity:0;animation:fadeUp 1s ease .7s forwards;
+}
+.hero-meta{
+  display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--tf);
+  opacity:0;animation:fadeUp 1s ease .85s forwards;
+}
+.hero-meta span{display:flex;align-items:center;gap:8px}
+.hero-meta .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 12px var(--gold);animation:pulso 2.6s ease-in-out infinite}
+.hero-cta{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 1s ease 1s forwards}
+.btn-primary,.btn-ghost{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;font-family:'IBM Plex Mono',monospace;
+  font-size:.7rem;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;text-decoration:none;border-radius:var(--r);
+  transition:all .2s;
+}
+.btn-primary{background:var(--gold);color:var(--bg)}
+.btn-primary:hover{background:#dab060;transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--border);color:var(--td)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:3;
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--tf);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeIn 1.4s ease 2.2s forwards;
+}
+.scroll-hint .arrow{width:1px;height:32px;background:var(--gold);
+  animation:descer 2s ease-in-out infinite}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{to{opacity:.7}}
+@keyframes pulso{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.2)}}
+@keyframes descer{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── tooltip da constelação ───────────────────────── */
+.const-tip{
+  position:absolute;z-index:4;pointer-events:none;
+  background:var(--s1);border:1px solid var(--border);
+  padding:8px 12px;border-radius:var(--r);
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
+  letter-spacing:.04em;color:var(--t);white-space:nowrap;
+  opacity:0;transition:opacity .15s;transform:translate(-50%,-130%);
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+}
+.const-tip.on{opacity:1}
+.const-tip .area{color:var(--gold);font-size:.55rem;letter-spacing:.22em;
+  text-transform:uppercase;display:block;margin-top:2px;opacity:.7}
+
+/* ── sections ─────────────────────────────────────── */
+section{padding:120px 48px;position:relative}
+.section-eye{
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  letter-spacing:.34em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:16px;display:flex;align-items:center;gap:14px;
+}
+.section-eye::before{content:'';width:36px;height:1px;background:var(--gold)}
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(1.9rem,3.6vw,3rem);font-weight:400;
+  line-height:1.15;margin-bottom:28px;max-width:34ch;
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-body{font-size:.96rem;color:var(--td);line-height:1.85;max-width:680px}
+.section-body p{margin-bottom:16px}
+
+/* ── revelação por scroll ────────────────────────── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s ease,transform 1s ease}
+.reveal.on{opacity:1;transform:none}
+.reveal-d1{transition-delay:.12s}
+.reveal-d2{transition-delay:.24s}
+.reveal-d3{transition-delay:.36s}
+
+/* ── manifesto / quote ───────────────────────────── */
+.principle{
+  padding:90px 48px;text-align:center;
+  border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);
+  position:relative;
+}
+.principle::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:580px;height:580px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold-soft),transparent 60%);
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.principle blockquote{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(1.4rem,2.6vw,2rem);font-style:italic;color:var(--gold);
+  max-width:760px;margin:0 auto;line-height:1.45;position:relative;
+}
+.principle cite{
+  display:block;margin-top:24px;font-family:'IBM Plex Mono',monospace;
+  font-size:.62rem;font-style:normal;color:var(--tf);letter-spacing:.28em;
+  text-transform:uppercase;position:relative;
+}
+
+/* ── constelação grande ──────────────────────────── */
+.constelacao{padding:120px 0;border-top:1px solid var(--border-soft)}
+.constelacao .head{padding:0 48px;max-width:900px;margin-bottom:48px}
+.constelacao-wrap{
+  position:relative;height:680px;margin:0 48px;
+  border:1px solid var(--border);border-radius:var(--r);
+  background:var(--s1);overflow:hidden;
+}
+.constelacao-wrap canvas{width:100%;height:100%;cursor:grab}
+.legenda{
+  position:absolute;left:24px;bottom:24px;z-index:4;
+  display:flex;flex-direction:column;gap:8px;
+  background:rgba(8,8,13,.7);padding:14px 16px;border-radius:var(--r);
+  border:1px solid var(--border-soft);backdrop-filter:blur(8px);
+}
+.legenda-item{
+  display:flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;font-size:.65rem;
+  letter-spacing:.06em;color:var(--td);
+}
+.legenda-dot{width:8px;height:8px;border-radius:50%}
+
+/* ── agora · contadores ──────────────────────────── */
+.agora{
+  background:var(--s1);border-top:1px solid var(--border-soft);
+  border-bottom:1px solid var(--border-soft);
+  padding:100px 48px;
+}
+.agora-head{max-width:900px;margin-bottom:48px}
+.contadores{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:32px;max-width:1100px;
+}
+.contador{display:flex;flex-direction:column;gap:6px}
+.contador-num{
+  font-family:'Instrument Serif',serif;font-size:clamp(2.4rem,4vw,3.4rem);
+  line-height:1;color:var(--gold);font-feature-settings:"lnum";
+}
+.contador-num em{font-style:italic;color:var(--teal)}
+.contador-label{
+  font-family:'IBM Plex Mono',monospace;font-size:.58rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--tf);
+}
+.contador-note{
+  font-size:.74rem;color:var(--td);line-height:1.5;margin-top:6px;
+  font-style:italic;
+}
+
+/* ── cockpit embed ───────────────────────────────── */
+.cockpit-bloco{
+  margin-top:64px;padding:40px;border:1px solid var(--border);
+  border-radius:var(--r);background:linear-gradient(180deg,var(--s1),var(--bg));
+}
+.cockpit-bloco .legend{
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--tf);
+  margin-bottom:18px;
+}
+.cockpit-bloco img{width:100%;height:auto;display:block;border-radius:2px;
+  filter:drop-shadow(0 4px 24px rgba(0,0,0,.4))}
+.cockpit-bloco .legenda-rodape{
+  margin-top:18px;font-size:.78rem;color:var(--td);font-style:italic;
+  text-align:center;
+}
+
+/* ── projectos · cards ──────────────────────────── */
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:18px;margin-top:40px;
+}
+.card{
+  position:relative;background:var(--s1);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px;
+  transition:border-color .3s,transform .3s;
+  display:flex;flex-direction:column;
+}
+.card:hover{border-color:rgba(200,160,80,.35);transform:translateY(-2px)}
+.card-mark{
+  position:absolute;top:18px;right:18px;
+  font-family:'IBM Plex Mono',monospace;font-size:.55rem;
+  letter-spacing:.22em;color:var(--tf);text-transform:uppercase;
+}
+.card-mark.cultura{color:var(--gold)}
+.card-mark.tech{color:var(--teal)}
+.card-mark.memoria{color:var(--cyan)}
+.card-mark.negocio{color:var(--rose)}
+.card-icon{font-size:1.6rem;margin-bottom:16px;opacity:.92}
+.card h3{
+  font-family:'IBM Plex Mono',monospace;font-size:.84rem;font-weight:500;
+  margin-bottom:10px;color:var(--t);letter-spacing:.02em;
+}
+.card h3.serif{font-family:'Instrument Serif',serif;font-size:1.3rem;font-weight:400;letter-spacing:0}
+.card p{font-size:.78rem;color:var(--td);line-height:1.7;flex:1}
+.card-link{
+  display:inline-flex;align-items:center;gap:6px;margin-top:16px;
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;
+  color:var(--gold);text-decoration:none;letter-spacing:.12em;
+  text-transform:uppercase;transition:gap .2s;align-self:flex-start;
+}
+.card-link:hover{gap:12px}
+
+/* ── contacto ──────────────────────────────────── */
+.contacto{
+  text-align:center;max-width:600px;margin:0 auto;
+  padding:120px 24px;
+}
+.contacto .section-eye{justify-content:center}
+.contacto .section-title{margin-left:auto;margin-right:auto}
+.social{
+  display:flex;gap:18px;justify-content:center;margin-top:32px;flex-wrap:wrap;
+}
+.social a{
+  font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--td);text-decoration:none;
+  padding:8px 14px;border:1px solid var(--border);border-radius:100px;
+  transition:all .2s;
+}
+.social a:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── footer ───────────────────────────────────── */
+footer{
+  padding:48px;border-top:1px solid var(--border-soft);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:24px;
+}
+.footer-left{
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  color:var(--tf);line-height:2;letter-spacing:.06em;
+}
+.footer-left b{color:var(--td);font-weight:500}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+.footer-links a{
+  font-family:'IBM Plex Mono',monospace;font-size:.62rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--td);text-decoration:none;transition:color .2s;
+}
+.footer-links a:hover{color:var(--gold)}
+
+/* ── responsivo ───────────────────────────────── */
+@media(max-width:768px){
+  nav{padding:12px 18px}
+  .nav-links{gap:12px}
+  .nav-links a{font-size:.6rem;letter-spacing:.1em}
+  .hero{padding:110px 22px 80px}
+  section{padding:80px 22px}
+  .constelacao .head{padding:0 22px}
+  .constelacao-wrap{margin:0 22px;height:560px}
+  .agora{padding:70px 22px}
+  footer{padding:32px 22px;flex-direction:column;align-items:flex-start}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  .hero-meta .dot{animation:none}
+}
+</style>
+</head>
+<body data-lang="pt">
+
+<svg class="grain" aria-hidden="true">
+  <filter id="grainF" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .12 0"/>
+  </filter>
+  <rect width="100%" height="100%" filter="url(#grainF)"/>
+</svg>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 32 32" fill="none">
+      <circle cx="16" cy="16" r="13" stroke="#c8a050" stroke-width="1.2"/>
+      <circle cx="16" cy="16" r="3" fill="#c8a050"/>
+      <line x1="16" y1="3" x2="16" y2="10" stroke="#c8a050" stroke-width=".6" opacity=".4"/>
+      <line x1="16" y1="22" x2="16" y2="29" stroke="#c8a050" stroke-width=".6" opacity=".4"/>
+      <line x1="3" y1="16" x2="10" y2="16" stroke="#c8a050" stroke-width=".6" opacity=".4"/>
+      <line x1="22" y1="16" x2="29" y2="16" stroke="#c8a050" stroke-width=".6" opacity=".4"/>
+    </svg>
+    Dr.PAL 2028
+  </a>
+  <div class="nav-links">
+    <a href="#sistema"><span class="en">System</span><span class="pt">Sistema</span></a>
+    <a href="#constelacao"><span class="en">Constellation</span><span class="pt">Constelação</span></a>
+    <a href="#agora"><span class="en">Now</span><span class="pt">Agora</span></a>
+    <a href="#projectos"><span class="en">Projects</span><span class="pt">Projectos</span></a>
+    <a href="#contacto"><span class="en">Contact</span><span class="pt">Contacto</span></a>
+    <button class="lang-btn" onclick="toggleLang()">
+      <span class="en">PT</span><span class="pt">EN</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═════════════ HERO ═════════════ -->
+<header class="hero" id="topo">
+  <canvas id="heroConst" aria-label="Constelação dos 22 projectos"></canvas>
+  <div class="const-tip" id="heroTip"></div>
+
+  <div class="hero-content">
+    <p class="hero-eye">
+      <span class="en">Personal AI Operating System · Porto</span>
+      <span class="pt">Sistema operativo pessoal de IA · Porto</span>
+    </p>
+    <h1>
+      <span class="en">AI serves the <em>Human</em>.</span>
+      <span class="pt">A IA serve o <em>Humano</em>.</span>
+    </h1>
+    <p class="hero-sub">
+      <span class="en">Twenty-two projects in constellation. One cockpit between memory and operation. The human decides — the system executes, suggests, protects.</span>
+      <span class="pt">Vinte e dois projectos em constelação. Um cockpit entre a memória e a operação. O humano decide — o sistema executa, sugere, protege.</span>
+    </p>
+
+    <div class="hero-meta">
+      <span><span class="dot"></span><span class="en">Live system</span><span class="pt">Sistema vivo</span></span>
+      <span id="metaConv">2.494 <span class="en">conversations</span><span class="pt">conversas</span></span>
+      <span id="metaProj">22 <span class="en">active projects</span><span class="pt">projectos activos</span></span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#constelacao" class="btn-primary">
+        <span class="en">See the living system</span>
+        <span class="pt">Ver o sistema vivo</span>
+        <span>→</span>
+      </a>
+      <a href="#manifesto" class="btn-ghost">
+        <span class="en">Read the manifesto</span>
+        <span class="pt">Ler o manifesto</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span class="en">scroll</span><span class="pt">continua</span>
+    <span class="arrow"></span>
+  </div>
+</header>
+
+<!-- ═════════════ MANIFESTO QUOTE ═════════════ -->
+<div class="principle" id="manifesto">
+  <blockquote>
+    <span class="en">«AI serves the Human.»</span>
+    <span class="pt">«A IA serve o Humano.»</span>
+  </blockquote>
+  <cite>
+    <span class="en">Paulo Branco · GENESIS Protocol</span>
+    <span class="pt">Paulo Branco · GENESIS Protocol</span>
+  </cite>
+</div>
+
+<!-- ═════════════ SISTEMA ═════════════ -->
+<section id="sistema">
+  <div class="reveal">
+    <p class="section-eye">
+      <span class="en">The system</span><span class="pt">O sistema</span>
+    </p>
+    <h2 class="section-title">
+      <span class="en">Five engines. One <em>brain</em>. One <em>cockpit</em>.</span>
+      <span class="pt">Cinco motores. Um <em>cérebro</em>. Um <em>cockpit</em>.</span>
+    </h2>
+  </div>
+  <div class="section-body reveal reveal-d1">
+    <p>
+      <span class="en">CLAUDIUS orchestrates Claude (strategy hub), ChatGPT (creative partner), Perplexity Pro (deep research), Grok (real-time radar), and NotebookLM (living library) — connected through n8n automation workflows that run 24/7.</span>
+      <span class="pt">O CLAUDIUS orquestra Claude (hub estratégico), ChatGPT (parceiro criativo), Perplexity Pro (pesquisa profunda), Grok (radar em tempo real) e NotebookLM (biblioteca viva) — conectados por workflows n8n a 24/7.</span>
+    </p>
+    <p>
+      <span class="en">Between memory and operation, a cockpit. The human reads what the vaults hold, decides what becomes canonical, and never lets the machine mix things without criterion.</span>
+      <span class="pt">Entre memória e operação, um cockpit. O humano lê o que os cofres contêm, decide o que se torna canónico, e nunca deixa a máquina misturar cofres sem critério.</span>
+    </p>
+  </div>
+
+  <!-- COCKPIT v1 embed -->
+  <div class="cockpit-bloco reveal reveal-d2">
+    <p class="legend">
+      <span class="en">Cockpit · pal + claudius · v1</span>
+      <span class="pt">Cockpit · pal + claudius · v1</span>
+    </p>
+    <img src="cockpit-pal-claudius.svg" alt="Cockpit PAL + Claudius — arquitectura de conhecimento">
+    <p class="legenda-rodape">
+      <span class="en">The bridge between vault and lab. Human decision in the centre.</span>
+      <span class="pt">A ponte entre cofre e laboratório. A decisão humana no centro.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═════════════ CONSTELAÇÃO ═════════════ -->
+<section class="constelacao" id="constelacao">
+  <div class="head reveal">
+    <p class="section-eye">
+      <span class="en">Constellation</span><span class="pt">Constelação</span>
+    </p>
+    <h2 class="section-title">
+      <span class="en">Twenty-two projects, <em>one orbit</em>.</span>
+      <span class="pt">Vinte e dois projectos, <em>uma órbita</em>.</span>
+    </h2>
+    <p class="section-body">
+      <span class="en">Each node is a real repository. Lines connect projects in the same cluster. Click a node to enter it. Drag to explore.</span>
+      <span class="pt">Cada nó é um repositório real. As linhas ligam projectos do mesmo cluster. Carrega num nó para entrar. Arrasta para explorar.</span>
+    </p>
+  </div>
+  <div class="constelacao-wrap">
+    <canvas id="mapaConst"></canvas>
+    <div class="const-tip" id="mapaTip"></div>
+    <div class="legenda">
+      <div class="legenda-item"><span class="legenda-dot" style="background:#c8a050"></span><span>Cultura</span></div>
+      <div class="legenda-item"><span class="legenda-dot" style="background:#5fc2b5"></span><span>Tecnologia</span></div>
+      <div class="legenda-item"><span class="legenda-dot" style="background:#4ecdc4"></span><span>Memória</span></div>
+      <div class="legenda-item"><span class="legenda-dot" style="background:#c87a5f"></span><span>Negócio</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ AGORA · CONTADORES ═════════════ -->
+<section class="agora" id="agora">
+  <div class="agora-head reveal">
+    <p class="section-eye">
+      <span class="en">Now — live numbers</span><span class="pt">Agora — números vivos</span>
+    </p>
+    <h2 class="section-title">
+      <span class="en">The system, <em>in pulse</em>.</span>
+      <span class="pt">O sistema, <em>em pulso</em>.</span>
+    </h2>
+  </div>
+
+  <div class="contadores reveal reveal-d1">
+    <div class="contador">
+      <span class="contador-num" data-target="2494">0</span>
+      <span class="contador-label"><span class="en">conversations</span><span class="pt">conversas</span></span>
+      <span class="contador-note">
+        <span class="en">across Claude · ChatGPT · sessions</span>
+        <span class="pt">através Claude · ChatGPT · sessões</span>
+      </span>
+    </div>
+    <div class="contador">
+      <span class="contador-num" data-target="22">0</span>
+      <span class="contador-label"><span class="en">active projects</span><span class="pt">projectos activos</span></span>
+      <span class="contador-note">
+        <span class="en">across four areas</span>
+        <span class="pt">em quatro áreas</span>
+      </span>
+    </div>
+    <div class="contador">
+      <span class="contador-num" data-target="40">0</span>
+      <span class="contador-label"><span class="en">letters mapped</span><span class="pt">cartas mapeadas</span></span>
+      <span class="contador-note">
+        <span class="en">Cartografia Camiliana seed</span>
+        <span class="pt">seed da Cartografia Camiliana</span>
+      </span>
+    </div>
+    <div class="contador">
+      <span class="contador-num"><em>78</em></span>
+      <span class="contador-label"><span class="en">tarot journey</span><span class="pt">jornada do tarot</span></span>
+      <span class="contador-note">
+        <span class="en">Master of Nothing · daily arcanum</span>
+        <span class="pt">Mestre de Nada · arcanum diário</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════ PROJECTOS ═════════════ -->
+<section id="projectos">
+  <div class="reveal">
+    <p class="section-eye">
+      <span class="en">Active projects</span><span class="pt">Projectos activos</span>
+    </p>
+    <h2 class="section-title">
+      <span class="en">Where the system <em>meets reality</em>.</span>
+      <span class="pt">Onde o sistema encontra a <em>realidade</em>.</span>
+    </h2>
+  </div>
+
+  <div class="card-grid reveal reveal-d1">
+    <article class="card">
+      <span class="card-mark cultura">Cultura</span>
+      <div class="card-icon">✒️</div>
+      <h3 class="serif">Cartografia Camiliana</h3>
+      <p>
+        <span class="en">Open map of Camilo Castelo Branco's correspondence. Portugal, Brazil, diaspora. Where the letters live today, and which ones nobody has found yet.</span>
+        <span class="pt">Mapa aberto da correspondência de Camilo Castelo Branco. Portugal, Brasil, diáspora. Onde estão hoje as cartas, e quais ninguém ainda encontrou.</span>
+      </p>
+      <a href="https://cartografia.drpal2028.me" target="_blank" rel="noopener" class="card-link">
+        <span class="en">Open map</span><span class="pt">Abrir mapa</span> →
+      </a>
+    </article>
+
+    <article class="card">
+      <span class="card-mark memoria">Memória</span>
+      <div class="card-icon">📓</div>
+      <h3 class="serif">Diário de Bordo</h3>
+      <p>
+        <span class="en">Public log updated after each session. What was built, decided, changed. The palimpsest gains a pulse.</span>
+        <span class="pt">Log público actualizado após cada sessão. O que foi construído, decidido, mudado. O palimpsesto ganha pulso.</span>
+      </p>
+      <a href="https://drpal2028-diario.netlify.app" target="_blank" rel="noopener" class="card-link">
+        <span class="en">Read</span><span class="pt">Ler</span> →
+      </a>
+    </article>
+
+    <article class="card">
+      <span class="card-mark tech">Tecnologia</span>
+      <div class="card-icon">⚙️</div>
+      <h3 class="serif">Claudius Architecture</h3>
+      <p>
+        <span class="en">Full map of the CLAUDIUS ecosystem — every engine, every connection, every automation.</span>
+        <span class="pt">Mapa completo do ecossistema CLAUDIUS — cada motor, cada conexão, cada automação.</span>
+      </p>
+      <a href="https://claudius-architecture.netlify.app" target="_blank" rel="noopener" class="card-link">
+        <span class="en">View</span><span class="pt">Ver</span> →
+      </a>
+    </article>
+
+    <article class="card">
+      <span class="card-mark tech">Tecnologia</span>
+      <div class="card-icon">🌙</div>
+      <h3 class="serif">Night Machine</h3>
+      <p>
+        <span class="en">Automated research that runs while you sleep. Perplexity searches, synthesises, delivers a morning briefing at 07:45.</span>
+        <span class="pt">Investigação automática enquanto dormes. A Perplexity pesquisa, sintetiza e entrega briefing matinal às 07:45.</span>
+      </p>
+    </article>
+
+    <article class="card">
+      <span class="card-mark cultura">Cultura</span>
+      <div class="card-icon">🃏</div>
+      <h3 class="serif">Master of Nothing</h3>
+      <p>
+        <span class="en">Seventy-eight days through the Tarot de Marseille. One card per day, analytical reflection — never prediction.</span>
+        <span class="pt">Setenta e oito dias pelo Tarot de Marselha. Uma carta por dia, reflexão analítica — nunca previsão.</span>
+      </p>
+    </article>
+
+    <article class="card">
+      <span class="card-mark negocio">Negócio</span>
+      <div class="card-icon">🏠</div>
+      <h3 class="serif">ERA Alatus</h3>
+      <p>
+        <span class="en">Real-estate team management, market analysis, gamified prospecting through the Sprint 40' method.</span>
+        <span class="pt">Gestão de equipa imobiliária, análise de mercado, prospecção gamificada via método Sprint 40'.</span>
+      </p>
+      <a href="https://alatus.drpal2028.me" target="_blank" rel="noopener" class="card-link">Site →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-mark negocio">Negócio</span>
+      <div class="card-icon">📊</div>
+      <h3 class="serif">PALCORE</h3>
+      <p>
+        <span class="en">MarketPulse lead-management system. Independent IP. Skool community. SaaS conversion in progress.</span>
+        <span class="pt">Sistema de gestão de leads MarketPulse. IP independente. Comunidade Skool. Conversão SaaS em curso.</span>
+      </p>
+    </article>
+
+    <article class="card">
+      <span class="card-mark cultura">Cultura</span>
+      <div class="card-icon">📚</div>
+      <h3 class="serif">PETRUS</h3>
+      <p>
+        <span class="en">Fernando Pessoa research. Pedro Veiga's Ex Libris. The archaeology of thought through literary fragments.</span>
+        <span class="pt">Investigação Pessoa. Ex Libris de Pedro Veiga. Arqueologia do pensamento por fragmentos literários.</span>
+      </p>
+    </article>
+  </div>
+</section>
+
+<!-- ═════════════ CONTACTO ═════════════ -->
+<section class="contacto" id="contacto">
+  <p class="section-eye">
+    <span class="en">Contact</span><span class="pt">Contacto</span>
+  </p>
+  <h2 class="section-title">
+    <span class="en">Let's <em>talk</em>.</span>
+    <span class="pt">Vamos <em>conversar</em>.</span>
+  </h2>
+  <p class="section-body" style="margin:0 auto 32px">
+    <span class="en">Interest in the project, PALCORE methodology, Cartografia Camiliana, or collaboration? Reach out.</span>
+    <span class="pt">Interesse no projecto, na metodologia PALCORE, na Cartografia Camiliana, ou em colaboração? Fala comigo.</span>
+  </p>
+  <a href="mailto:drpal.project2028@gmail.com" class="btn-primary">drpal.project2028@gmail.com</a>
+
+  <div class="social">
+    <a href="https://x.com/DrPal_2028" target="_blank" rel="noopener">X</a>
+    <a href="https://instagram.com/drpalproject2028" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://substack.com/@drpal2028" target="_blank" rel="noopener">Substack</a>
+    <a href="https://github.com/drpalproject2028" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <b>© 2026 Dr.PAL Project 2028</b><br>
+    Paulo Branco · Porto, Portugal<br>
+    drpal2028.base.eth · GENESIS Protocol
+  </div>
+  <div class="footer-links">
+    <a href="#sistema">Sistema</a>
+    <a href="#constelacao">Constelação</a>
+    <a href="#agora">Agora</a>
+    <a href="https://github.com/drpalproject2028" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+'use strict';
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ── language toggle ───────────────────────────── */
+function toggleLang(){
+  const b = document.body;
+  b.dataset.lang = b.dataset.lang === 'en' ? 'pt' : 'en';
+  document.documentElement.lang = b.dataset.lang;
+  localStorage.setItem('drpalLang', b.dataset.lang);
+}
+const saved = localStorage.getItem('drpalLang');
+if (saved) { document.body.dataset.lang = saved; document.documentElement.lang = saved; }
+
+/* ── data: 22 projectos ────────────────────────── */
+const PROJ = [
+  /* cultura */
+  {id:'cartografia',  label:'Cartografia Camiliana',  area:'cultura', url:'https://cartografia.drpal2028.me'},
+  {id:'palcore-manifesto', label:'Palcore Manifesto', area:'cultura'},
+  {id:'audiveris',    label:'Audiveris',              area:'cultura'},
+  {id:'exlibris',     label:'Exlibris Generator',     area:'cultura'},
+  {id:'wardrobe',     label:'Wardrobe Emanuel',       area:'cultura'},
+  /* tecnologia (claudius + tools) */
+  {id:'claudius-arch',     label:'Claudius Architecture', area:'tech', url:'https://claudius-architecture.netlify.app'},
+  {id:'claudius-dash',     label:'Claudius Dashboards',   area:'tech'},
+  {id:'claudius-mcp',      label:'Claudius MCP Server',   area:'tech'},
+  {id:'claudius-proof',    label:'Claudius Proof',        area:'tech'},
+  {id:'focus-meter',       label:'Focus Meter',           area:'tech'},
+  {id:'decision-partner',  label:'Decision Partner',      area:'tech'},
+  {id:'vibe-tracker',      label:'Vibe Tracker',          area:'tech'},
+  /* memória */
+  {id:'pal',          label:'PAL Vault',          area:'memoria'},
+  {id:'diario',       label:'Diário de Bordo',    area:'memoria', url:'https://drpal2028-diario.netlify.app'},
+  {id:'chatmap',      label:'ChatMap Forest',     area:'memoria', url:'https://chatmap-forest-claudius.netlify.app'},
+  {id:'drpal2028-site', label:'drpal2028 site',   area:'memoria'},
+  /* negócio */
+  {id:'alatus-aps',         label:'Alatus APS',           area:'negocio'},
+  {id:'alatus-tools',       label:'Alatus Tools',         area:'negocio'},
+  {id:'alatus-porto',       label:'Alatus Porto Insights',area:'negocio'},
+  {id:'palcore-market',     label:'Market Studio',        area:'negocio'},
+  {id:'pact-leads',         label:'Pact Leads',           area:'negocio'},
+  {id:'pact-palcore',       label:'Pact Palcore',         area:'negocio'}
+];
+const AREA_COR = {cultura:'#c8a050', tech:'#5fc2b5', memoria:'#4ecdc4', negocio:'#c87a5f'};
+const AREA_NOME = {cultura:'Cultura', tech:'Tecnologia', memoria:'Memória', negocio:'Negócio'};
+
+/* ── constelação · canvas reusável ──────────────── */
+function setupConst(canvas, tip, opts={}){
+  const ctx = canvas.getContext('2d');
+  let W=0, H=0, dpr=1, nodes=[], rafId=null, mouseN=null;
+  const interactive = opts.interactive ?? true;
+  const compact = opts.compact ?? false;
+
+  function dim(){
+    dpr = Math.min(devicePixelRatio||1, 1.6);
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = W*dpr; canvas.height = H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    posicionar();
+  }
+
+  function posicionar(){
+    /* hub-and-spoke: clusters distribuídos em 4 sectores */
+    const areas = ['cultura','tech','memoria','negocio'];
+    const grupos = areas.map(a=>({a, items: PROJ.filter(p=>p.area===a)}));
+    nodes = [];
+
+    const cx = W/2, cy = H/2;
+    const baseR = Math.min(W,H) * (compact ? 0.32 : 0.36);
+    const inner = baseR * 0.45;
+
+    grupos.forEach((g, gi)=>{
+      const setoreCentro = (gi/4) * Math.PI*2 - Math.PI/2;
+      const setor = Math.PI*2/4;
+      const n = g.items.length;
+      g.items.forEach((p, i)=>{
+        /* distribuir num arco do sector */
+        const t = (i+0.5)/n;
+        const ang = setoreCentro - setor/2 + setor*t;
+        const r = inner + (baseR - inner) * (0.4 + Math.sin(i*1.7)*0.4);
+        nodes.push({
+          ...p,
+          x: cx + Math.cos(ang)*r,
+          y: cy + Math.sin(ang)*r,
+          baseX: cx + Math.cos(ang)*r,
+          baseY: cy + Math.sin(ang)*r,
+          ang, r,
+          phase: Math.random()*Math.PI*2,
+          radius: compact ? 4 : 5.5
+        });
+      });
+    });
+  }
+
+  function desenhar(t){
+    ctx.clearRect(0,0,W,H);
+
+    /* respiração de posições */
+    if (!RM){
+      nodes.forEach(n=>{
+        n.x = n.baseX + Math.cos(t*0.0003 + n.phase) * (compact ? 4 : 7);
+        n.y = n.baseY + Math.sin(t*0.0003 + n.phase) * (compact ? 4 : 7);
+      });
+    }
+
+    /* linhas: mesmo cluster */
+    nodes.forEach((a, i)=>{
+      nodes.forEach((b, j)=>{
+        if (j<=i) return;
+        if (a.area !== b.area) return;
+        const dx = a.x-b.x, dy = a.y-b.y;
+        const d = Math.hypot(dx,dy);
+        const dMax = Math.min(W,H) * 0.42;
+        if (d > dMax) return;
+        const isMouse = mouseN && (a===mouseN || b===mouseN);
+        const alpha = (1 - d/dMax) * (isMouse ? 0.9 : 0.25);
+        ctx.strokeStyle = AREA_COR[a.area];
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = isMouse ? 1.4 : 0.5;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      });
+    });
+
+    /* núcleo central — emblema cockpit */
+    ctx.globalAlpha = 0.4;
+    ctx.strokeStyle = '#b8c4dc';
+    ctx.lineWidth = 1;
+    const cx = W/2, cy = H/2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-22); ctx.lineTo(cx+22, cy);
+    ctx.lineTo(cx, cy+22); ctx.lineTo(cx-22, cy); ctx.closePath();
+    ctx.stroke();
+    ctx.fillStyle = '#b8c4dc';
+    ctx.beginPath();
+    ctx.arc(cx, cy, 2.6, 0, Math.PI*2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    /* nós */
+    nodes.forEach(n=>{
+      const cor = AREA_COR[n.area];
+      const isM = n===mouseN;
+      const r = isM ? n.radius * 1.7 : n.radius;
+      /* halo */
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r*3.5);
+      grad.addColorStop(0, cor);
+      grad.addColorStop(0.4, cor+'33');
+      grad.addColorStop(1, cor+'00');
+      ctx.globalAlpha = isM ? 0.55 : 0.32;
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r*3.5, 0, Math.PI*2);
+      ctx.fill();
+      /* dot */
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = cor;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI*2);
+      ctx.fill();
+      if (isM){
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    });
+
+    rafId = requestAnimationFrame(desenhar);
+  }
+
+  function start(){
+    if (rafId) cancelAnimationFrame(rafId);
+    dim();
+    rafId = requestAnimationFrame(desenhar);
+  }
+
+  if (interactive){
+    canvas.addEventListener('mousemove', e=>{
+      const r = canvas.getBoundingClientRect();
+      const mx = e.clientX - r.left, my = e.clientY - r.top;
+      let best = null, bestD = 24;
+      nodes.forEach(n=>{
+        const d = Math.hypot(n.x-mx, n.y-my);
+        if (d < bestD){ bestD = d; best = n; }
+      });
+      if (best !== mouseN){
+        mouseN = best;
+        if (best && tip){
+          tip.innerHTML = best.label + '<span class="area">' + AREA_NOME[best.area] + '</span>';
+          tip.style.left = (best.x) + 'px';
+          tip.style.top = (best.y) + 'px';
+          tip.classList.add('on');
+          canvas.style.cursor = best.url ? 'pointer' : 'default';
+        } else {
+          if (tip) tip.classList.remove('on');
+          canvas.style.cursor = 'default';
+        }
+      } else if (best && tip){
+        tip.style.left = (best.x) + 'px';
+        tip.style.top = (best.y) + 'px';
+      }
+    });
+    canvas.addEventListener('mouseleave', ()=>{
+      mouseN = null;
+      if (tip) tip.classList.remove('on');
+    });
+    canvas.addEventListener('click', e=>{
+      if (mouseN && mouseN.url) window.open(mouseN.url, '_blank', 'noopener');
+    });
+  }
+
+  window.addEventListener('resize', ()=>dim());
+  start();
+}
+
+/* setup das duas constelações */
+setupConst(
+  document.getElementById('heroConst'),
+  document.getElementById('heroTip'),
+  {compact: true}
+);
+setupConst(
+  document.getElementById('mapaConst'),
+  document.getElementById('mapaTip')
+);
+
+/* ── reveals ────────────────────────────────────── */
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if (!e.isIntersecting) return;
+    e.target.classList.add('on');
+    io.unobserve(e.target);
+  });
+}, {threshold: 0.18});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ── contadores · animar ao entrar ─────────────── */
+const ioCount = new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.target;
+    const dur = 1400;
+    const t0 = performance.now();
+    function tick(t){
+      const k = Math.min(1, (t-t0)/dur);
+      const eased = 1 - Math.pow(1-k, 3);
+      el.textContent = Math.round(target * eased).toLocaleString('pt-PT');
+      if (k < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('pt-PT');
+    }
+    requestAnimationFrame(tick);
+    ioCount.unobserve(el);
+  });
+}, {threshold: 0.5});
+document.querySelectorAll('[data-target]').forEach(el=>ioCount.observe(el));
+
+</script>
+</body>
+</html>

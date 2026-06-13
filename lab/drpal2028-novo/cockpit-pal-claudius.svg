@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080"
+  font-family="-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Inter, system-ui, sans-serif"
+  text-rendering="geometricPrecision" shape-rendering="geometricPrecision">
+
+  <defs>
+    <!-- background gradient: midnight blue → near-black -->
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0F1828"/>
+      <stop offset="0.55" stop-color="#0A111E"/>
+      <stop offset="1" stop-color="#060B14"/>
+    </linearGradient>
+
+    <!-- subtle directional glows -->
+    <radialGradient id="palGlow" cx="0.16" cy="0.5" r="0.42">
+      <stop offset="0" stop-color="#5FC2B5" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#5FC2B5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="claudiusGlow" cx="0.84" cy="0.5" r="0.42">
+      <stop offset="0" stop-color="#C8A24B" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#C8A24B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cockpitGlow" cx="0.5" cy="0.48" r="0.34">
+      <stop offset="0" stop-color="#9FB3D4" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#9FB3D4" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- dotted screen pattern, very faint -->
+    <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="0.6" fill="#FFFFFF" fill-opacity="0.055"/>
+    </pattern>
+
+    <!-- noise filter (paper grain) -->
+    <filter id="grain" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .025 0"/>
+    </filter>
+  </defs>
+
+  <!-- ═══ BACKGROUND ═════════════════════════════════ -->
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#dots)"/>
+  <rect width="1920" height="1080" fill="url(#palGlow)"/>
+  <rect width="1920" height="1080" fill="url(#claudiusGlow)"/>
+  <rect width="1920" height="1080" fill="url(#cockpitGlow)"/>
+  <rect width="1920" height="1080" filter="url(#grain)" opacity="0.55"/>
+
+  <!-- ═══ HEADER ═════════════════════════════════════ -->
+  <g>
+    <text x="960" y="58" text-anchor="middle" font-size="10" letter-spacing="0.58em" fill="#5A6781">DRPAL2028 · PROJECT 2028</text>
+    <text x="960" y="100" text-anchor="middle" font-size="28" font-weight="200" letter-spacing="0.20em" fill="#EAEEF7">COCKPIT · PAL + CLAUDIUS</text>
+    <text x="960" y="124" text-anchor="middle" font-size="11" letter-spacing="0.34em" fill="#8693AC">ARQUITECTURA DE CONHECIMENTO · 13 JUN 2026</text>
+    <line x1="120" y1="148" x2="1800" y2="148" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  </g>
+
+  <!-- ═══ LEFT · PAL-VAULT ═══════════════════════════ -->
+  <g transform="translate(72 178)">
+    <rect width="520" height="712" rx="2" fill="#FFFFFF" fill-opacity="0.014" stroke="#FFFFFF" stroke-opacity="0.07"/>
+
+    <!-- corner accents -->
+    <path d="M 0 28 L 0 0 L 28 0" fill="none" stroke="#5FC2B5" stroke-width="1.5"/>
+    <path d="M 520 684 L 520 712 L 492 712" fill="none" stroke="#5FC2B5" stroke-width="1.5"/>
+
+    <text x="36" y="46" font-size="10" letter-spacing="0.48em" fill="#5FC2B5">01 / 03</text>
+    <text x="36" y="92" font-size="28" font-weight="300" letter-spacing="0.04em" fill="#EAEEF7">PAL-VAULT</text>
+    <text x="36" y="118" font-size="12" letter-spacing="0.06em" fill="#8693AC" font-style="italic">Cofre oficial · evidência · histórico ChatGPT</text>
+    <line x1="36" y1="138" x2="120" y2="138" stroke="#5FC2B5" stroke-width="1.5"/>
+
+    <text x="36" y="178" font-size="10" letter-spacing="0.42em" fill="#7E8AA0">ESTRUTURA</text>
+
+    <!-- 7 estructural blocks (monospace) -->
+    <g font-family="Menlo, Monaco, Consolas, 'SF Mono', monospace" font-size="13" fill="#CAD2E2">
+      <g transform="translate(36 206)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">00_RAW</text></g>
+      <g transform="translate(36 236)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">10_EXTRACTED_CANDIDATES</text></g>
+      <g transform="translate(36 266)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">20_CANONICAL_GRAPH</text></g>
+      <g transform="translate(36 296)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">30_EVIDENCE</text></g>
+      <g transform="translate(36 326)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">40_EXPORTS</text></g>
+      <g transform="translate(36 356)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">90_DASHBOARDS</text></g>
+      <g transform="translate(36 386)"><circle cx="0" cy="-4" r="2.4" fill="#5FC2B5"/><text x="18" y="0">91_CODEX</text></g>
+    </g>
+
+    <line x1="36" y1="430" x2="484" y2="430" stroke="#FFFFFF" stroke-opacity="0.06"/>
+    <text x="36" y="460" font-size="10" letter-spacing="0.42em" fill="#7E8AA0">ESTADO</text>
+
+    <!-- status pills -->
+    <g font-size="11">
+      <g transform="translate(36 486)">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#5FC2B5" fill-opacity="0.10" stroke="#5FC2B5" stroke-opacity="0.42"/>
+        <circle cx="16" cy="-2" r="3" fill="#5FC2B5"/>
+        <text x="30" y="3" letter-spacing="0.02em" fill="#D5E0EE">OpenAI export preservado</text>
+      </g>
+      <g transform="translate(266 486)">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#C8A24B" fill-opacity="0.10" stroke="#C8A24B" stroke-opacity="0.42"/>
+        <circle cx="16" cy="-2" r="3" fill="#C8A24B"/>
+        <text x="30" y="3" letter-spacing="0.02em" fill="#D5E0EE">ChatGPT Δ · PASS c/ avisos</text>
+      </g>
+      <g transform="translate(36 528)" font-family="Menlo, Monaco, Consolas, monospace" font-size="10.5">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.025" stroke="#FFFFFF" stroke-opacity="0.16"/>
+        <text x="16" y="3" letter-spacing="0.02em" fill="#8693AC">historical_evidence_delta</text>
+      </g>
+      <g transform="translate(266 528)" font-family="Menlo, Monaco, Consolas, monospace" font-size="10.5">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.025" stroke="#FFFFFF" stroke-opacity="0.16"/>
+        <text x="16" y="3" letter-spacing="0.02em" fill="#8693AC">not_canonical_current</text>
+      </g>
+    </g>
+
+    <!-- foot: vault icon -->
+    <g transform="translate(260 626)" stroke="#5FC2B5" stroke-opacity="0.45" fill="none" stroke-width="1">
+      <rect x="-58" y="-34" width="116" height="68" rx="2"/>
+      <line x1="-58" y1="-17" x2="58" y2="-17"/>
+      <line x1="-58" y1="0" x2="58" y2="0"/>
+      <line x1="-58" y1="17" x2="58" y2="17"/>
+      <line x1="-22" y1="-34" x2="-22" y2="34"/>
+      <line x1="22" y1="-34" x2="22" y2="34"/>
+      <circle cx="-40" cy="-8.5" r="1.6" fill="#5FC2B5" stroke="none" opacity="0.6"/>
+      <circle cx="0"   cy="8.5"  r="1.6" fill="#5FC2B5" stroke="none" opacity="0.6"/>
+      <circle cx="40"  cy="-25"  r="1.6" fill="#5FC2B5" stroke="none" opacity="0.6"/>
+    </g>
+    <text x="260" y="684" text-anchor="middle" font-size="9.5" letter-spacing="0.36em" fill="#5A6781">EVIDÊNCIA · ARQUIVO · ESTÁVEL</text>
+  </g>
+
+  <!-- ═══ CENTER · COCKPIT ═══════════════════════════ -->
+  <g transform="translate(636 158)">
+    <rect width="648" height="752" rx="2" fill="#FFFFFF" fill-opacity="0.024" stroke="#FFFFFF" stroke-opacity="0.12"/>
+
+    <!-- frame corners (cockpit/instrument feel) -->
+    <path d="M 0 36 L 0 0 L 36 0" fill="none" stroke="#B8C4DC" stroke-width="1.5" stroke-opacity="0.75"/>
+    <path d="M 612 0 L 648 0 L 648 36" fill="none" stroke="#B8C4DC" stroke-width="1.5" stroke-opacity="0.75"/>
+    <path d="M 0 716 L 0 752 L 36 752" fill="none" stroke="#B8C4DC" stroke-width="1.5" stroke-opacity="0.75"/>
+    <path d="M 612 752 L 648 752 L 648 716" fill="none" stroke="#B8C4DC" stroke-width="1.5" stroke-opacity="0.75"/>
+
+    <text x="324" y="52" text-anchor="middle" font-size="10" letter-spacing="0.62em" fill="#B8C4DC">02 / 03</text>
+
+    <line x1="288" y1="78" x2="360" y2="78" stroke="#B8C4DC" stroke-width="1.5"/>
+
+    <text x="324" y="128" text-anchor="middle" font-size="46" font-weight="200" letter-spacing="0.36em" fill="#EAEEF7">COCKPIT</text>
+    <text x="324" y="160" text-anchor="middle" font-size="12.5" letter-spacing="0.18em" fill="#B8C4DC" font-style="italic">decisão humana · ponte entre memória e operação</text>
+
+    <!-- compass emblem -->
+    <g transform="translate(324 268)" stroke="#B8C4DC" fill="none">
+      <polygon points="0,-62 62,0 0,62 -62,0" stroke-width="1" stroke-opacity="0.75"/>
+      <polygon points="0,-26 26,0 0,26 -26,0" stroke-width="1" stroke-opacity="0.7"/>
+      <circle r="3.4" fill="#B8C4DC" stroke="none"/>
+      <line x1="0" y1="-78" x2="0" y2="-68" stroke-width="1" stroke-opacity="0.7"/>
+      <line x1="68" y1="0" x2="78" y2="0" stroke-width="1" stroke-opacity="0.7"/>
+      <line x1="0" y1="68" x2="0" y2="78" stroke-width="1" stroke-opacity="0.7"/>
+      <line x1="-78" y1="0" x2="-68" y2="0" stroke-width="1" stroke-opacity="0.7"/>
+      <line x1="-44" y1="-44" x2="-38" y2="-38" stroke-width="0.7" stroke-opacity="0.5"/>
+      <line x1="44" y1="-44" x2="38" y2="-38" stroke-width="0.7" stroke-opacity="0.5"/>
+      <line x1="-44" y1="44" x2="-38" y2="38" stroke-width="0.7" stroke-opacity="0.5"/>
+      <line x1="44" y1="44" x2="38" y2="38" stroke-width="0.7" stroke-opacity="0.5"/>
+    </g>
+    <text x="324" y="378" text-anchor="middle" font-size="9" letter-spacing="0.4em" fill="#5A6781">N · S · E · O</text>
+
+    <text x="324" y="420" text-anchor="middle" font-size="10" letter-spacing="0.52em" fill="#7E8AA0">PRINCÍPIOS</text>
+
+    <!-- 4 principles -->
+    <g font-size="17" font-weight="300" fill="#EAEEF7">
+      <g transform="translate(122 462)">
+        <text x="0" y="0" font-family="Menlo, Monaco, Consolas, monospace" font-size="11.5" fill="#5FC2B5" letter-spacing="0.04em">01</text>
+        <text x="40" y="0" letter-spacing="0.02em">Evidência primeiro</text>
+      </g>
+      <g transform="translate(122 510)">
+        <text x="0" y="0" font-family="Menlo, Monaco, Consolas, monospace" font-size="11.5" fill="#5FC2B5" letter-spacing="0.04em">02</text>
+        <text x="40" y="0" letter-spacing="0.02em">Candidato depois</text>
+      </g>
+      <g transform="translate(122 558)">
+        <text x="0" y="0" font-family="Menlo, Monaco, Consolas, monospace" font-size="11.5" fill="#B8C4DC" letter-spacing="0.04em">03</text>
+        <text x="40" y="0" letter-spacing="0.02em">Canónico só com decisão</text>
+      </g>
+      <g transform="translate(122 606)">
+        <text x="0" y="0" font-family="Menlo, Monaco, Consolas, monospace" font-size="11.5" fill="#C8A24B" letter-spacing="0.04em">04</text>
+        <text x="40" y="0" letter-spacing="0.02em">Não misturar cofres sem critério</text>
+      </g>
+    </g>
+
+    <!-- flow at the bottom -->
+    <line x1="80" y1="660" x2="568" y2="660" stroke="#FFFFFF" stroke-opacity="0.06"/>
+    <text x="324" y="688" text-anchor="middle" font-size="10" letter-spacing="0.44em" fill="#7E8AA0">FLUXO</text>
+
+    <g transform="translate(324 720)" font-family="Menlo, Monaco, Consolas, monospace" font-size="10.5">
+      <text x="-218" y="0" text-anchor="start" fill="#5FC2B5" letter-spacing="0.06em">pal</text>
+      <line x1="-194" y1="-4" x2="-108" y2="-4" stroke="#FFFFFF" stroke-opacity="0.22"/>
+      <circle cx="-150" cy="-4" r="1.4" fill="#FFFFFF" fill-opacity="0.3"/>
+      <text x="-80" y="0" text-anchor="middle" fill="#B8C4DC" letter-spacing="0.06em">decisão</text>
+      <line x1="-32" y1="-4" x2="60" y2="-4" stroke="#FFFFFF" stroke-opacity="0.22"/>
+      <circle cx="14" cy="-4" r="1.4" fill="#FFFFFF" fill-opacity="0.3"/>
+      <text x="92" y="0" text-anchor="middle" fill="#B8C4DC" letter-spacing="0.06em">canónico</text>
+      <line x1="148" y1="-4" x2="194" y2="-4" stroke="#FFFFFF" stroke-opacity="0.22"/>
+      <text x="218" y="0" text-anchor="end" fill="#C8A24B" letter-spacing="0.06em">claudius</text>
+    </g>
+  </g>
+
+  <!-- ═══ RIGHT · CLAUDIUS-VAULT ═════════════════════ -->
+  <g transform="translate(1328 178)">
+    <rect width="520" height="712" rx="2" fill="#FFFFFF" fill-opacity="0.014" stroke="#FFFFFF" stroke-opacity="0.07"/>
+
+    <path d="M 0 28 L 0 0 L 28 0" fill="none" stroke="#C8A24B" stroke-width="1.5"/>
+    <path d="M 520 684 L 520 712 L 492 712" fill="none" stroke="#C8A24B" stroke-width="1.5"/>
+
+    <text x="36" y="46" font-size="10" letter-spacing="0.48em" fill="#C8A24B">03 / 03</text>
+    <text x="36" y="92" font-size="28" font-weight="300" letter-spacing="0.04em" fill="#EAEEF7">CLAUDIUS-VAULT</text>
+    <text x="36" y="118" font-size="12" letter-spacing="0.06em" fill="#8693AC" font-style="italic">Laboratório técnico · Claude · sessões · conversas</text>
+    <line x1="36" y1="138" x2="120" y2="138" stroke="#C8A24B" stroke-width="1.5"/>
+
+    <text x="36" y="178" font-size="10" letter-spacing="0.42em" fill="#7E8AA0">ESTRUTURA</text>
+
+    <g font-family="Menlo, Monaco, Consolas, monospace" font-size="13" fill="#CAD2E2">
+      <g transform="translate(36 206)"><circle cx="0" cy="-4" r="2.4" fill="#C8A24B"/><text x="18" y="0">INDEX.md</text></g>
+      <g transform="translate(36 236)"><circle cx="0" cy="-4" r="2.4" fill="#C8A24B"/><text x="18" y="0">conversas/</text></g>
+      <g transform="translate(36 266)"><circle cx="0" cy="-4" r="2.4" fill="#C8A24B"/><text x="18" y="0">sessoes/</text></g>
+      <g transform="translate(36 296)"><circle cx="0" cy="-4" r="2.4" fill="#C8A24B"/><text x="18" y="0">pipeline/</text></g>
+      <g transform="translate(36 326)"><circle cx="0" cy="-4" r="2.4" fill="#C8A24B"/><text x="18" y="0">grafo v2</text></g>
+      <g transform="translate(36 356)"><circle cx="0" cy="-4" r="2.4" fill="#C8A24B"/><text x="18" y="0">helper scripts</text></g>
+    </g>
+
+    <line x1="36" y1="430" x2="484" y2="430" stroke="#FFFFFF" stroke-opacity="0.06"/>
+    <text x="36" y="460" font-size="10" letter-spacing="0.42em" fill="#7E8AA0">ESTADO</text>
+
+    <g font-size="11">
+      <g transform="translate(36 486)">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#C8A24B" fill-opacity="0.13" stroke="#C8A24B" stroke-opacity="0.5"/>
+        <circle cx="16" cy="-2" r="3" fill="#C8A24B"/>
+        <text x="30" y="3" letter-spacing="0.02em" fill="#EAEEF7" font-family="Menlo, Monaco, Consolas, monospace" font-size="11">2.494 conversas</text>
+      </g>
+      <g transform="translate(266 486)">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#5FC2B5" fill-opacity="0.10" stroke="#5FC2B5" stroke-opacity="0.42"/>
+        <circle cx="16" cy="-2" r="3" fill="#5FC2B5"/>
+        <text x="30" y="3" letter-spacing="0.02em" fill="#D5E0EE">Sessões reparadas</text>
+      </g>
+      <g transform="translate(36 528)">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.025" stroke="#FFFFFF" stroke-opacity="0.18"/>
+        <text x="16" y="3" letter-spacing="0.02em" fill="#B8C4DC">Obsidian pronto</text>
+      </g>
+      <g transform="translate(266 528)">
+        <rect x="0" y="-16" width="218" height="28" rx="14" fill="#FFFFFF" fill-opacity="0.025" stroke="#FFFFFF" stroke-opacity="0.18"/>
+        <text x="16" y="3" letter-spacing="0.02em" fill="#B8C4DC">Repo limpo</text>
+      </g>
+    </g>
+
+    <!-- foot: lab/circuit icon -->
+    <g transform="translate(260 626)" stroke="#C8A24B" stroke-opacity="0.5" fill="none" stroke-width="1">
+      <circle cx="-58" cy="0" r="7"/>
+      <circle cx="58" cy="0" r="7"/>
+      <circle cx="0" cy="-30" r="7"/>
+      <circle cx="0" cy="30" r="7"/>
+      <circle cx="0" cy="0" r="3.5" fill="#C8A24B" stroke="none" opacity="0.8"/>
+      <line x1="-51" y1="0" x2="-3.5" y2="0"/>
+      <line x1="51" y1="0" x2="3.5" y2="0"/>
+      <line x1="0" y1="-23" x2="0" y2="-3.5"/>
+      <line x1="0" y1="23" x2="0" y2="3.5"/>
+      <line x1="-52" y1="-5" x2="-5" y2="-25"/>
+      <line x1="52" y1="5" x2="5" y2="25"/>
+    </g>
+    <text x="260" y="684" text-anchor="middle" font-size="9.5" letter-spacing="0.36em" fill="#5A6781">ACTIVO · TÉCNICO · OPERACIONAL</text>
+  </g>
+
+  <!-- ═══ BRIDGE CONNECTORS ══════════════════════════ -->
+  <g>
+    <line x1="592" y1="534" x2="636" y2="534" stroke="#5FC2B5" stroke-width="1" stroke-opacity="0.6"/>
+    <circle cx="622" cy="534" r="3" fill="#5FC2B5" opacity="0.85"/>
+    <circle cx="608" cy="534" r="1.6" fill="#5FC2B5" opacity="0.5"/>
+
+    <line x1="1284" y1="534" x2="1328" y2="534" stroke="#C8A24B" stroke-width="1" stroke-opacity="0.6"/>
+    <circle cx="1298" cy="534" r="3" fill="#C8A24B" opacity="0.85"/>
+    <circle cx="1312" cy="534" r="1.6" fill="#C8A24B" opacity="0.5"/>
+  </g>
+
+  <!-- ═══ BOTTOM · ENTRADA RECOMENDADA ═══════════════ -->
+  <line x1="120" y1="932" x2="1800" y2="932" stroke="#FFFFFF" stroke-opacity="0.06"/>
+  <text x="960" y="966" text-anchor="middle" font-size="10" letter-spacing="0.58em" fill="#7E8AA0">ENTRADA RECOMENDADA</text>
+
+  <g transform="translate(960 1004)">
+    <g transform="translate(-200 0)">
+      <rect x="-180" y="-22" width="360" height="48" rx="3" fill="#5FC2B5" fill-opacity="0.10" stroke="#5FC2B5" stroke-opacity="0.6"/>
+      <rect x="-166" y="-10" width="20" height="20" fill="#5FC2B5"/>
+      <text x="-138" y="6" font-size="13" letter-spacing="0.24em" fill="#EAEEF7" font-weight="400">ABRIR PRIMEIRO · PAL VAULT</text>
+    </g>
+    <g transform="translate(200 0)">
+      <rect x="-180" y="-22" width="360" height="48" rx="3" fill="#C8A24B" fill-opacity="0.10" stroke="#C8A24B" stroke-opacity="0.6"/>
+      <rect x="-166" y="-10" width="20" height="20" fill="#C8A24B"/>
+      <text x="-138" y="6" font-size="13" letter-spacing="0.24em" fill="#EAEEF7" font-weight="400">ABRIR PRIMEIRO · CLAUDIUS VAULT</text>
+    </g>
+  </g>
+
+  <text x="960" y="1058" text-anchor="middle" font-size="9.5" letter-spacing="0.38em" fill="#4A5568">PROJECT 2028 · COCKPIT v1 · 2026</text>
+</svg>
